@@ -1,0 +1,18 @@
+Vendedor
+TEST_USER_1319511361	
+QlCx7CiV55	
+
+
+Comprador 1
+TEST_USER_1319509801	
+PfPGjFHMqV	
+
+Argentina	
+Comprador 2
+TEST_USER_1320346500	
+Xt5uye90pv	
+
+Argentina	
+Comprador 3
+TEST_USER_1787976720	
+VQ8ahYdr3Q	
