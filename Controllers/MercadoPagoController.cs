@@ -5,20 +5,22 @@ using MercadoPago.Resource.Preference;
 using MercadoPago.Client.Payment;
 using MercadoPago.Resource.Payment;
 using DTO;
-using System.Security.Cryptography;
-using System.Text;
 using Microsoft.Extensions.Options;
-using Microsoft.EntityFrameworkCore;
 using AppContext;
+using Services;
+using System.Text;
+using System.Reflection;
 
 namespace Escolapios.Controllers;
 
 [ApiController]
 [Route("/api/v1/[controller]")]
-public class MercadoPagoController(IOptions<ApiSettings> apiSettings, AppDBContext context) : ControllerBase
+public class MercadoPagoController(IOptions<AppSettings> appSettings, AppDBContext context, IMailService mailService, IMercadoPagoService mpService) : ControllerBase
 {
-  private readonly ApiSettings _apiSettings = apiSettings.Value;
+  private readonly AppSettings _appSettings = appSettings.Value;
   private readonly AppDBContext _context = context;
+  private readonly IMailService _mailService = mailService;
+  private readonly IMercadoPagoService _mpService = mpService;
 
   [HttpGet("create")]
   public IActionResult CreatePreferences()
@@ -26,7 +28,7 @@ public class MercadoPagoController(IOptions<ApiSettings> apiSettings, AppDBConte
 
     try
     {
-      MercadoPagoConfig.AccessToken = _apiSettings.MPAccessToken;
+      MercadoPagoConfig.AccessToken = _appSettings.MPAccessToken;
 
       PreferenceRequest request = new()
       {
@@ -39,9 +41,9 @@ public class MercadoPagoController(IOptions<ApiSettings> apiSettings, AppDBConte
             Title = "Inscripción",
             Quantity = 1,
             CurrencyId = "ARS",
-            UnitPrice = _apiSettings.RegistrationFee,
+            UnitPrice = _appSettings.RegistrationFee,
         },],
-        NotificationUrl = _apiSettings.NotificationUrl,
+        NotificationUrl = _appSettings.NotificationUrl,
       };
 
 
@@ -71,9 +73,9 @@ public class MercadoPagoController(IOptions<ApiSettings> apiSettings, AppDBConte
       var cardholderName = request.cardholderName;
       var lastFourDigits = request.lastFourDigits;
 
-      MercadoPagoConfig.AccessToken = _apiSettings.MPAccessToken;
-      formData.TransactionAmount = _apiSettings.RegistrationFee;
-      formData.NotificationUrl = _apiSettings.NotificationUrl;
+      MercadoPagoConfig.AccessToken = _appSettings.MPAccessToken;
+      formData.TransactionAmount = _appSettings.RegistrationFee;
+      formData.NotificationUrl = _appSettings.NotificationUrl;
 
       formData.Metadata = new Dictionary<string, object>() { { "paymentMethod", paymentMethod }, { "cardholderName", cardholderName }, { "lastFourDigits", lastFourDigits }, { "FirstName", request.firstName }, { "LastName", request.lastName }, { "DNI", request.DNI } };
       formData.Payer.FirstName = cardholderName;
@@ -96,70 +98,40 @@ public class MercadoPagoController(IOptions<ApiSettings> apiSettings, AppDBConte
   {
     try
     {
-      // Obtain the x-signature and x-request-id values from the header
-      Request.Headers.TryGetValue("X-Signature", out var xSignature);
-      Request.Headers.TryGetValue("X-Request-ID", out var xRequestId);
+      var isValidSignature = _mpService.VerifySignature(Request);
 
-      // Obtain Query params related to the request URL
-      var queryParams = HttpContext.Request.Query;
+      if (!isValidSignature) return BadRequest("HMAC verification failed");
 
-      // Extract the "data.id" from the query params
-      var dataID = queryParams.ContainsKey("data.id") ? queryParams["data.id"].ToString() : string.Empty;
 
-      // Separating the x-signature into parts
-      var parts = xSignature.ToString().Split(',');
-
-      // Initializing variables to store ts and hash
-      string? ts = null, hash = null;
-
-      // Iterate over the values to obtain ts and v1
-      foreach (var part in parts)
-      {
-        var keyValue = part.Split('=', 2);
-        if (keyValue.Length == 2)
-        {
-          var key = keyValue[0].Trim();
-          var value = keyValue[1].Trim();
-          if (key == "ts") ts = value;
-          else if (key == "v1") hash = value;
-
-        }
-      }
-
-      // Obtain the secret key for the user/application
-      var secret = _apiSettings.MPWebhookSecret;
-
-      // Generate the manifest string
-      var manifest = $"id:{dataID};request-id:{xRequestId};ts:{ts};";
-
-      // Create an HMAC signature defining the hash type and the key as a byte array
-      var sha = CreateHmacSha256(manifest, secret);
-      if (sha != hash)
-        return BadRequest("HMAC verification failed");
-
-      MercadoPagoConfig.AccessToken = _apiSettings.MPAccessToken;
+      MercadoPagoConfig.AccessToken = _appSettings.MPAccessToken;
       var PaymentClient = new PaymentClient();
-      Payment payment = await PaymentClient.GetAsync(test.Data.Id);
-
-      if (payment == null) return BadRequest("Invalid 'test.Data.Id)'");
+      Payment paymentFromMP = await PaymentClient.GetAsync(test.Data.Id);
+      if (paymentFromMP == null) return BadRequest("Invalid 'test.Data.Id)'");
 
       var paymentData = new AppContext.Models.Payment
       {
-        PaymentId = payment.Id
+        PaymentId = paymentFromMP.Id,
+        FirstName = _mpService.GetDictionaryData("first_name", paymentFromMP.Metadata) ?? "",
+        LastName = _mpService.GetDictionaryData("last_name", paymentFromMP.Metadata) ?? "",
+        IdentificationNumber = _mpService.GetLongData("dni", paymentFromMP.Metadata),
+        paymentStatus = paymentFromMP.Status,
       };
-
-      if (payment.Metadata.TryGetValue("first_name", out object? FirstName))
-        paymentData.FirstName = FirstName as string ?? "Vacío";
-
-      if (payment.Metadata.TryGetValue("last_name", out object? LastName))
-        paymentData.LastName = LastName as string ?? "Vacío";
-
-      if (payment.Metadata.TryGetValue("dni", out object? IdentificationNumber))
-        paymentData.IdentificationNumber = IdentificationNumber as string ?? "Vacío";
-
 
       _context.PaymentTable.Add(paymentData);
       _context.SaveChanges();
+
+      var Subject = "Informacion Congreso de Educación Humanista";
+
+      var Body = $@"
+            <html>
+            <body>
+                <h1>Hola {paymentFromMP.Card.Cardholder.Name}</h1>
+                <p>Estamos encantados de que hayas decidido sumarte al <i>'Congreso de Educación Humanista'</i>.</p>
+                <p>Tu pago está en estado: <b>{paymentFromMP.Status}</b></p>
+            </body>
+            </html>";
+
+      _mailService.SendEmail(paymentFromMP.Payer.Email, Subject, Body);
 
       return Ok();
     }
@@ -170,14 +142,65 @@ public class MercadoPagoController(IOptions<ApiSettings> apiSettings, AppDBConte
 
   }
 
-
-  private static string CreateHmacSha256(string data, string key)
+  [HttpGet("user/{dni}")]
+  public IActionResult GetByDNI(long dni)
   {
-    using var hmac = new HMACSHA256(Encoding.UTF8.GetBytes(key));
-    var hash = hmac.ComputeHash(Encoding.UTF8.GetBytes(data));
-    return BitConverter.ToString(hash).Replace("-", "").ToLowerInvariant();
+    try
+    {
+      var userInfo = (from payInfo in _context.PaymentTable where payInfo.IdentificationNumber == dni select payInfo).ToList();
+
+      return Ok(userInfo);
+
+    }
+
+    catch (Exception ex)
+    {
+
+      return StatusCode(500, ex);
+    }
+
   }
 
+
+  [HttpGet("csv")]
+  public IActionResult GetFile()
+  {
+    try
+    {
+      // Obtiene los datos de la base de datos
+      var usersInfo = (from payInfo in _context.PaymentTable
+                       where payInfo.paymentStatus == PaymentStatus.Approved
+                       select payInfo).ToList();
+
+      // Verifica si hay datos
+      if (usersInfo == null || usersInfo.Count == 0)
+      {
+        return NotFound("No records found.");
+      }
+
+      var csv = new StringBuilder();
+
+      // Usar reflexión para obtener las propiedades del primer elemento (asumiendo que todos los elementos son del mismo tipo)
+      PropertyInfo[] properties = usersInfo.First().GetType().GetProperties();
+
+      // Construir la cabecera del CSV con los nombres de las propiedades
+      csv.AppendLine(string.Join(";", properties.Select(p => p.Name)));
+
+      // Añadir las filas de datos
+      foreach (var user in usersInfo)
+      {
+        var line = string.Join(";", properties.Select(p => p.GetValue(user, null)?.ToString().Replace(';', ',')));
+        csv.AppendLine(line);
+      }
+
+      return File(Encoding.UTF8.GetBytes(csv.ToString()), "text/csv", "UserInfo.csv");
+    }
+    catch (Exception ex)
+    {
+      return StatusCode(500, $"Internal server error: {ex.Message}");
+    }
+
+  }
 
 
 }

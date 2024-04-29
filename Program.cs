@@ -1,6 +1,7 @@
 using AppContext;
 using DTO;
 using Microsoft.EntityFrameworkCore;
+using Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,7 +21,7 @@ if (env.IsProduction())
 }
 
 // Registrar la configuración fuertemente tipada directamente sin sección
-builder.Services.Configure<ApiSettings>(builder.Configuration);
+builder.Services.Configure<AppSettings>(builder.Configuration);
 
 // Add services to the container.
 
@@ -37,6 +38,11 @@ builder.Services.AddCors(options =>
             .AllowAnyHeader();
   });
 });
+
+// Registro del servicio
+builder.Services.AddScoped<IMailService, MailService>();
+builder.Services.AddScoped<IMercadoPagoService, MercadoPagoService>();
+
 
 var app = builder.Build();
 

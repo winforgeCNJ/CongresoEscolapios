@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 using MercadoPago.Client.Payment;
 using Newtonsoft.Json;
 
@@ -36,24 +37,32 @@ public class PaymentData
 
 public class PayRequestDTO
 {
+  [Required]
   public PaymentCreateRequest formData { get; set; }
+  [Required]
   public string paymentMethod { get; set; }
+  [Required]
   public string cardholderName { get; set; }
+  [Required]
   public string lastFourDigits { get; set; }
+  [Required]
   public string firstName { get; set; }
+  [Required]
   public string lastName { get; set; }
+  [Required]
   public string DNI { get; set; }
 
 }
 
 
 
-public class ApiSettings
+public class AppSettings
 {
   public string MPAccessToken { get; set; }
   public string MPWebhookSecret { get; set; }
   public long RegistrationFee { get; set; }
   public string NotificationUrl { get; set; }
-
+  public string GmailUser { get; set; }
+  public string GmailPassword { get; set; }
 
 }
