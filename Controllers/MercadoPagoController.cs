@@ -206,6 +206,13 @@ public class MercadoPagoController : ControllerBase
 
   }
 
+  [HttpGet("cofig")]
+  public IActionResult GetEnvs()
+  {
+    return Ok(_appSettings);
+
+  }
+
 
   [HttpGet("csv")]
   public IActionResult GetFile()
