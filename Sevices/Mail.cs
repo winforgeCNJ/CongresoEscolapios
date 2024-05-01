@@ -11,18 +11,24 @@ public interface IMailService
 }
 
 
-public class MailService(IOptions<AppSettings> appSettings) : IMailService
+public class MailService : IMailService
 {
-  private readonly string from = appSettings.Value.GmailUser;
-  private readonly string appPassword = appSettings.Value.GmailPassword;
+  private string From { get; set; }
+  private string AppPassword { get; set; }
+
+  public MailService(IOptions<AppSettings> appSettings)
+  {
+    From = appSettings.Value.GmailUser;
+    AppPassword = appSettings.Value.GmailPassword;
+  }
 
   public void SendEmail(string to, string subject, string body)
   {
     try
     {
-      var fromAddress = new MailAddress(from);
+      var fromAddress = new MailAddress(From);
       var toAddress = new MailAddress(to);
-      var fromPassword = appPassword;
+      var fromPassword = AppPassword;
 
       using var smtp = new SmtpClient
       {

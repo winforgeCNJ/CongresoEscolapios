@@ -16,12 +16,21 @@ namespace Escolapios.Controllers;
 
 [ApiController]
 [Route("/api/v1/[controller]")]
-public class MercadoPagoController(IOptions<AppSettings> appSettings, AppDBContext context, IMailService mailService, IMercadoPagoService mpService) : ControllerBase
+public class MercadoPagoController : ControllerBase
 {
-  private readonly AppSettings _appSettings = appSettings.Value;
-  private readonly AppDBContext _context = context;
-  private readonly IMailService _mailService = mailService;
-  private readonly IMercadoPagoService _mpService = mpService;
+  private AppSettings _appSettings { get; set; }
+  private AppDBContext _context { get; set; }
+  private IMailService _mailService { get; set; }
+  private IMercadoPagoService _mpService { get; set; }
+
+
+  public MercadoPagoController(IOptions<AppSettings> appSettings, AppDBContext context, IMailService mailService, IMercadoPagoService mpService)
+  {
+    _appSettings = appSettings.Value;
+    _context = context;
+    _mailService = mailService;
+    _mpService = mpService;
+  }
 
   [HttpGet("create")]
   public IActionResult CreatePreferences()
@@ -36,14 +45,15 @@ public class MercadoPagoController(IOptions<AppSettings> appSettings, AppDBConte
         // el Purpose = 'wallet_purchase', solo permite pagos registrados
         // para permitir pagos de invitados, puede omitir esta propiedad
         Purpose = "wallet_purchase",
-        Items = [
-        new ()
+        Items = new List<PreferenceItemRequest>
         {
-            Title = "Inscripción",
-            Quantity = 1,
-            CurrencyId = "ARS",
-            UnitPrice = _appSettings.RegistrationFee,
-        },],
+          new(){
+                  Title = "Inscripción",
+                  Quantity = 1,
+                  CurrencyId = "ARS",
+                  UnitPrice = _appSettings.RegistrationFee,
+                }
+        },
         NotificationUrl = _appSettings.NotificationUrl,
         // Metadata = n new Dictionary<string, object>() { { "paymentMethod", paymentMethod }, { "cardholderName", cardholderName }, { "lastFourDigits", lastFourDigits }, { "FirstName", request.firstName }, { "LastName", request.lastName }, { "DNI", request.DNI } };
       };

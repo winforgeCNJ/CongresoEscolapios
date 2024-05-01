@@ -13,10 +13,11 @@ public interface IMercadoPagoService
   long GetLongData(string key, IDictionary<string, object> dictionary);
 }
 
-public class MercadoPagoService(IOptions<AppSettings> appSettings) : IMercadoPagoService
+public class MercadoPagoService : IMercadoPagoService
 {
 
-  private readonly string secret = appSettings.Value.MPWebhookSecret;
+  private string Secret { get; set; }
+  public MercadoPagoService(IOptions<AppSettings> appSettings) => Secret = appSettings.Value.MPWebhookSecret;
 
   public bool VerifySignature(HttpRequest request)
   {
@@ -58,7 +59,7 @@ public class MercadoPagoService(IOptions<AppSettings> appSettings) : IMercadoPag
       var manifest = $"id:{dataID};request-id:{xRequestId};ts:{ts};";
 
       // Create an HMAC signature defining the hash type and the key as a byte array
-      var sha = CreateHmacSha256(manifest, secret);
+      var sha = CreateHmacSha256(manifest, Secret);
       if (sha != hash)
         return false;
 
