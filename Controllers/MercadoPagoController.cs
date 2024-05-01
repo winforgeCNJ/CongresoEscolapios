@@ -121,22 +121,22 @@ public class MercadoPagoController : ControllerBase
       // if (!isValidSignature) return BadRequest("HMAC verification failed");
 
 
-      // MercadoPagoConfig.AccessToken = _appSettings.MPAccessToken;
-      // var PaymentClient = new PaymentClient();
-      // Payment paymentFromMP = await PaymentClient.GetAsync(WebhookReq.Data.Id);
-      // if (paymentFromMP == null) return BadRequest("Invalid 'WebhookReq.Data.Id)'");
+      MercadoPagoConfig.AccessToken = _appSettings.MPAccessToken;
+      var PaymentClient = new PaymentClient();
+      Payment paymentFromMP = await PaymentClient.GetAsync(WebhookReq.Data.Id);
+      if (paymentFromMP == null) return BadRequest("Invalid 'WebhookReq.Data.Id)'");
 
-      // var paymentData = new AppContext.Models.Payment
-      // {
-      //   PaymentId = paymentFromMP.Id ?? 0,
-      //   FirstName = _mpService.GetDictionaryData("first_name", paymentFromMP.Metadata) ?? "",
-      //   LastName = _mpService.GetDictionaryData("last_name", paymentFromMP.Metadata) ?? "",
-      //   IdentificationNumber = _mpService.GetLongData("dni", paymentFromMP.Metadata),
-      //   paymentStatus = paymentFromMP.Status,
-      // };
+      var paymentData = new AppContext.Models.Payment
+      {
+        PaymentId = paymentFromMP.Id ?? 0,
+        FirstName = _mpService.GetDictionaryData("first_name", paymentFromMP.Metadata) ?? "Testeando",
+        LastName = _mpService.GetDictionaryData("last_name", paymentFromMP.Metadata) ?? "Test",
+        IdentificationNumber = _mpService.GetLongData("dni", paymentFromMP.Metadata),
+        paymentStatus = paymentFromMP.Status,
+      };
 
-      // _context.PaymentTable.Add(paymentData);
-      // _context.SaveChanges();
+      _context.PaymentTable.Add(paymentData);
+      _context.SaveChanges();
 
       // if (paymentFromMP.Status == PaymentStatus.Approved || paymentFromMP.Status == PaymentStatus.Rejected)
       // {
@@ -153,18 +153,6 @@ public class MercadoPagoController : ControllerBase
 
       //   _mailService.SendEmail(paymentFromMP.Payer.Email, Subject, Body);
       // }
-
-      var paymentData = new AppContext.Models.Payment
-      {
-        PaymentId = 10,
-        FirstName = "Naim",
-        LastName = "Chaya",
-        IdentificationNumber = 41161156,
-        paymentStatus = PaymentStatus.Approved,
-      };
-
-      _context.PaymentTable.Add(paymentData);
-      _context.SaveChanges();
 
       return Ok();
     }
