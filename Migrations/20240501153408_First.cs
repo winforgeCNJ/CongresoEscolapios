@@ -18,9 +18,10 @@ namespace Escolapios.Migrations
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     PaymentId = table.Column<long>(type: "bigint", nullable: true),
+                    paymentStatus = table.Column<string>(type: "text", nullable: false),
                     FirstName = table.Column<string>(type: "text", nullable: false),
                     LastName = table.Column<string>(type: "text", nullable: false),
-                    IdentificationNumber = table.Column<string>(type: "text", nullable: false)
+                    IdentificationNumber = table.Column<long>(type: "bigint", nullable: false)
                 },
                 constraints: table =>
                 {

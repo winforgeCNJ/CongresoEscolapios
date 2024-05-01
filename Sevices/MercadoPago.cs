@@ -82,8 +82,8 @@ public class MercadoPagoService(IOptions<AppSettings> appSettings) : IMercadoPag
   public string? GetDictionaryData(string key, IDictionary<string, object> dictionary)
   {
 
-    dictionary.TryGetValue("first_name", out object? FirstName);
-    return FirstName as string ?? null;
+    dictionary.TryGetValue(key, out object? value);
+    return value as string ?? null;
   }
 
   public long GetLongData(string key, IDictionary<string, object> dictionary)

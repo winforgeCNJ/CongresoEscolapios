@@ -10,6 +10,7 @@ using AppContext;
 using Services;
 using System.Text;
 using System.Reflection;
+using Helpers;
 
 namespace Escolapios.Controllers;
 
@@ -44,6 +45,7 @@ public class MercadoPagoController(IOptions<AppSettings> appSettings, AppDBConte
             UnitPrice = _appSettings.RegistrationFee,
         },],
         NotificationUrl = _appSettings.NotificationUrl,
+        // Metadata = n new Dictionary<string, object>() { { "paymentMethod", paymentMethod }, { "cardholderName", cardholderName }, { "lastFourDigits", lastFourDigits }, { "FirstName", request.firstName }, { "LastName", request.lastName }, { "DNI", request.DNI } };
       };
 
 
@@ -77,10 +79,16 @@ public class MercadoPagoController(IOptions<AppSettings> appSettings, AppDBConte
       formData.TransactionAmount = _appSettings.RegistrationFee;
       formData.NotificationUrl = _appSettings.NotificationUrl;
 
-      formData.Metadata = new Dictionary<string, object>() { { "paymentMethod", paymentMethod }, { "cardholderName", cardholderName }, { "lastFourDigits", lastFourDigits }, { "FirstName", request.firstName }, { "LastName", request.lastName }, { "DNI", request.DNI } };
+      formData.Metadata = new Dictionary<string, object>() {
+          { "paymentMethod", paymentMethod },
+          { "cardholderName", cardholderName },
+          { "lastFourDigits", lastFourDigits },
+          { "FirstName", request.firstName },
+          { "LastName", request.lastName },
+          { "DNI", request.DNI }
+        };
+
       formData.Payer.FirstName = cardholderName;
-
-
 
       var client = new PaymentClient();
       Payment payment = await client.CreateAsync(formData);
@@ -94,7 +102,7 @@ public class MercadoPagoController(IOptions<AppSettings> appSettings, AppDBConte
   }
 
   [HttpPost("webhook")]
-  public async Task<IActionResult> Webhook(PaymentNotificationDto test)
+  public async Task<IActionResult> Webhook(PaymentNotificationDto WebhookReq)
   {
     try
     {
@@ -105,12 +113,12 @@ public class MercadoPagoController(IOptions<AppSettings> appSettings, AppDBConte
 
       MercadoPagoConfig.AccessToken = _appSettings.MPAccessToken;
       var PaymentClient = new PaymentClient();
-      Payment paymentFromMP = await PaymentClient.GetAsync(test.Data.Id);
-      if (paymentFromMP == null) return BadRequest("Invalid 'test.Data.Id)'");
+      Payment paymentFromMP = await PaymentClient.GetAsync(WebhookReq.Data.Id);
+      if (paymentFromMP == null) return BadRequest("Invalid 'WebhookReq.Data.Id)'");
 
       var paymentData = new AppContext.Models.Payment
       {
-        PaymentId = paymentFromMP.Id,
+        PaymentId = paymentFromMP.Id ?? 0,
         FirstName = _mpService.GetDictionaryData("first_name", paymentFromMP.Metadata) ?? "",
         LastName = _mpService.GetDictionaryData("last_name", paymentFromMP.Metadata) ?? "",
         IdentificationNumber = _mpService.GetLongData("dni", paymentFromMP.Metadata),
@@ -120,18 +128,21 @@ public class MercadoPagoController(IOptions<AppSettings> appSettings, AppDBConte
       _context.PaymentTable.Add(paymentData);
       _context.SaveChanges();
 
-      var Subject = "Informacion Congreso de Educación Humanista";
+      if (paymentFromMP.Status == PaymentStatus.Approved || paymentFromMP.Status == PaymentStatus.Rejected)
+      {
 
-      var Body = $@"
+        var Subject = "Informacion Congreso de Educación Humanista";
+        var Body = $@"
             <html>
             <body>
-                <h1>Hola {paymentFromMP.Card.Cardholder.Name}</h1>
+                <h4>Hola {paymentFromMP.Card.Cardholder.Name}</h4>
                 <p>Estamos encantados de que hayas decidido sumarte al <i>'Congreso de Educación Humanista'</i>.</p>
                 <p>Tu pago está en estado: <b>{paymentFromMP.Status}</b></p>
             </body>
             </html>";
 
-      _mailService.SendEmail(paymentFromMP.Payer.Email, Subject, Body);
+        _mailService.SendEmail(paymentFromMP.Payer.Email, Subject, Body);
+      }
 
       return Ok();
     }
@@ -143,13 +154,37 @@ public class MercadoPagoController(IOptions<AppSettings> appSettings, AppDBConte
   }
 
   [HttpGet("user/{dni}")]
-  public IActionResult GetByDNI(long dni)
+  public async Task<IActionResult> GetByDNI(long dni)
   {
     try
     {
-      var userInfo = (from payInfo in _context.PaymentTable where payInfo.IdentificationNumber == dni select payInfo).ToList();
+      MercadoPagoConfig.AccessToken = _appSettings.MPAccessToken;
 
-      return Ok(userInfo);
+
+      var paymentGroups = (from payInfo in _context.PaymentTable
+                           where payInfo.IdentificationNumber == dni
+                           group payInfo by payInfo.PaymentId into grouped
+                           select new PaymentGroupInfo
+                           {
+                             PaymentId = grouped.Key,
+                             Payments = grouped.ToList(),
+                             PaymentInfoMP = new Payment(),
+                           }).ToList();
+
+      // Luego, procesa cada grupo para obtener la información adicional asincrónicamente
+      var PaymentClient = new PaymentClient();
+      var tasks = paymentGroups.Select(async group =>
+     {
+       group.PaymentInfoMP = await PaymentClient.GetAsync(group.PaymentId);
+       return group;  // Devuelve el grupo actualizado
+     });
+
+      var updatedGroups = await Task.WhenAll(tasks);  // Espera que todas las tareas completen
+
+      // Opcional: Manejar los grupos actualizados aquí
+
+
+      return Ok(updatedGroups);
 
     }
 

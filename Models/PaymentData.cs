@@ -4,7 +4,7 @@ namespace AppContext.Models;
 public class Payment
 {
   public int Id { get; set; }
-  public long? PaymentId { get; set; }
+  public long PaymentId { get; set; }
   public string paymentStatus { get; set; }
 
 
