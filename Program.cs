@@ -49,7 +49,7 @@ var app = builder.Build();
 // Aplicar migraciones automáticamente
 using (var scope = app.Services.CreateScope())
 {
-  var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+  var dbContext = scope.ServiceProvider.GetRequiredService<AppDBContext>();
   dbContext.Database.Migrate();
 }
 
