@@ -129,8 +129,8 @@ public class MercadoPagoController : ControllerBase
       var paymentData = new AppContext.Models.Payment
       {
         PaymentId = paymentFromMP.Id ?? 0,
-        FirstName = _mpService.GetDictionaryData("first_name", paymentFromMP.Metadata) ?? "Testeando",
-        LastName = _mpService.GetDictionaryData("last_name", paymentFromMP.Metadata) ?? "Test",
+        FirstName = _mpService.GetDictionaryData("first_name", paymentFromMP.Metadata) ?? "",
+        LastName = _mpService.GetDictionaryData("last_name", paymentFromMP.Metadata) ?? "",
         IdentificationNumber = _mpService.GetLongData("dni", paymentFromMP.Metadata),
         paymentStatus = paymentFromMP.Status,
       };
@@ -138,21 +138,21 @@ public class MercadoPagoController : ControllerBase
       _context.PaymentTable.Add(paymentData);
       _context.SaveChanges();
 
-      // if (paymentFromMP.Status == PaymentStatus.Approved || paymentFromMP.Status == PaymentStatus.Rejected)
-      // {
+      if (paymentFromMP.Status == PaymentStatus.Approved || paymentFromMP.Status == PaymentStatus.Rejected)
+      {
 
-      //   var Subject = "Informacion Congreso de Educación Humanista";
-      //   var Body = $@"
-      //       <html>
-      //       <body>
-      //           <h4>Hola {paymentFromMP.Card.Cardholder.Name}</h4>
-      //           <p>Estamos encantados de que hayas decidido sumarte al <i>'Congreso de Educación Humanista'</i>.</p>
-      //           <p>Tu pago está en estado: <b>{paymentFromMP.Status}</b></p>
-      //       </body>
-      //       </html>";
+        var Subject = "Informacion Congreso de Educación Humanista";
+        var Body = $@"
+            <html>
+            <body>
+                <h4>Hola {paymentFromMP.Card.Cardholder.Name}</h4>
+                <p>Estamos encantados de que hayas decidido sumarte al <i>'Congreso de Educación Humanista'</i>.</p>
+                <p>Tu pago está en estado: <b>{paymentFromMP.Status}</b></p>
+            </body>
+            </html>";
 
-      //   _mailService.SendEmail(paymentFromMP.Payer.Email, Subject, Body);
-      // }
+        _mailService.SendEmail(paymentFromMP.Payer.Email, Subject, Body);
+      }
 
       return Ok();
     }
@@ -205,14 +205,6 @@ public class MercadoPagoController : ControllerBase
     }
 
   }
-
-  [HttpGet("cofig")]
-  public IActionResult GetEnvs()
-  {
-    return Ok(_appSettings);
-
-  }
-
 
   [HttpGet("csv")]
   public IActionResult GetFile()
