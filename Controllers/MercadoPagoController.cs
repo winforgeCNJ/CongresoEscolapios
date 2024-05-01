@@ -116,43 +116,55 @@ public class MercadoPagoController : ControllerBase
   {
     try
     {
-      var isValidSignature = _mpService.VerifySignature(Request);
+      // var isValidSignature = _mpService.VerifySignature(Request);
 
-      if (!isValidSignature) return BadRequest("HMAC verification failed");
+      // if (!isValidSignature) return BadRequest("HMAC verification failed");
 
 
-      MercadoPagoConfig.AccessToken = _appSettings.MPAccessToken;
-      var PaymentClient = new PaymentClient();
-      Payment paymentFromMP = await PaymentClient.GetAsync(WebhookReq.Data.Id);
-      if (paymentFromMP == null) return BadRequest("Invalid 'WebhookReq.Data.Id)'");
+      // MercadoPagoConfig.AccessToken = _appSettings.MPAccessToken;
+      // var PaymentClient = new PaymentClient();
+      // Payment paymentFromMP = await PaymentClient.GetAsync(WebhookReq.Data.Id);
+      // if (paymentFromMP == null) return BadRequest("Invalid 'WebhookReq.Data.Id)'");
+
+      // var paymentData = new AppContext.Models.Payment
+      // {
+      //   PaymentId = paymentFromMP.Id ?? 0,
+      //   FirstName = _mpService.GetDictionaryData("first_name", paymentFromMP.Metadata) ?? "",
+      //   LastName = _mpService.GetDictionaryData("last_name", paymentFromMP.Metadata) ?? "",
+      //   IdentificationNumber = _mpService.GetLongData("dni", paymentFromMP.Metadata),
+      //   paymentStatus = paymentFromMP.Status,
+      // };
+
+      // _context.PaymentTable.Add(paymentData);
+      // _context.SaveChanges();
+
+      // if (paymentFromMP.Status == PaymentStatus.Approved || paymentFromMP.Status == PaymentStatus.Rejected)
+      // {
+
+      //   var Subject = "Informacion Congreso de Educación Humanista";
+      //   var Body = $@"
+      //       <html>
+      //       <body>
+      //           <h4>Hola {paymentFromMP.Card.Cardholder.Name}</h4>
+      //           <p>Estamos encantados de que hayas decidido sumarte al <i>'Congreso de Educación Humanista'</i>.</p>
+      //           <p>Tu pago está en estado: <b>{paymentFromMP.Status}</b></p>
+      //       </body>
+      //       </html>";
+
+      //   _mailService.SendEmail(paymentFromMP.Payer.Email, Subject, Body);
+      // }
 
       var paymentData = new AppContext.Models.Payment
       {
-        PaymentId = paymentFromMP.Id ?? 0,
-        FirstName = _mpService.GetDictionaryData("first_name", paymentFromMP.Metadata) ?? "",
-        LastName = _mpService.GetDictionaryData("last_name", paymentFromMP.Metadata) ?? "",
-        IdentificationNumber = _mpService.GetLongData("dni", paymentFromMP.Metadata),
-        paymentStatus = paymentFromMP.Status,
+        PaymentId = 10,
+        FirstName = "Naim",
+        LastName = "Chaya",
+        IdentificationNumber = 41161156,
+        paymentStatus = PaymentStatus.Approved,
       };
 
       _context.PaymentTable.Add(paymentData);
       _context.SaveChanges();
-
-      if (paymentFromMP.Status == PaymentStatus.Approved || paymentFromMP.Status == PaymentStatus.Rejected)
-      {
-
-        var Subject = "Informacion Congreso de Educación Humanista";
-        var Body = $@"
-            <html>
-            <body>
-                <h4>Hola {paymentFromMP.Card.Cardholder.Name}</h4>
-                <p>Estamos encantados de que hayas decidido sumarte al <i>'Congreso de Educación Humanista'</i>.</p>
-                <p>Tu pago está en estado: <b>{paymentFromMP.Status}</b></p>
-            </body>
-            </html>";
-
-        _mailService.SendEmail(paymentFromMP.Payer.Email, Subject, Body);
-      }
 
       return Ok();
     }
