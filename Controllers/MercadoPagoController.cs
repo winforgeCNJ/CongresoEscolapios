@@ -32,8 +32,8 @@ public class MercadoPagoController : ControllerBase
     _mpService = mpService;
   }
 
-  [HttpGet("create")]
-  public IActionResult CreatePreferences()
+  [HttpPost("createReference")]
+  public IActionResult CreatePreferences(DTOPreferenceReq preferenceReq)
   {
 
     try
@@ -55,9 +55,12 @@ public class MercadoPagoController : ControllerBase
                 }
         },
         NotificationUrl = _appSettings.NotificationUrl,
-        // Metadata = n new Dictionary<string, object>() { { "paymentMethod", paymentMethod }, { "cardholderName", cardholderName }, { "lastFourDigits", lastFourDigits }, { "FirstName", request.firstName }, { "LastName", request.lastName }, { "DNI", request.DNI } };
+        Metadata = new Dictionary<string, object>() {
+          { "FirstName", preferenceReq.firstName },
+          { "LastName", preferenceReq.lastName },
+          { "DNI", preferenceReq.DNI }
+        }
       };
-
 
       PreferenceClient client = new();
       Preference preference = client.Create(request);
@@ -75,8 +78,8 @@ public class MercadoPagoController : ControllerBase
 
   }
 
-  [HttpPost("pay")]
-  public async Task<IActionResult> Payment(PayRequestDTO request)
+  [HttpPost("payment")]
+  public async Task<IActionResult> Payment(DTOPaymentReq request)
   {
     try
     {
@@ -112,7 +115,7 @@ public class MercadoPagoController : ControllerBase
   }
 
   [HttpPost("webhook")]
-  public async Task<IActionResult> Webhook(PaymentNotificationDto WebhookReq)
+  public async Task<IActionResult> Webhook(DTOWebhookReq WebhookReq)
   {
     try
     {

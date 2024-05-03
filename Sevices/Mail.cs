@@ -1,6 +1,6 @@
 using System.Net;
 using System.Net.Mail;
-using DTO;
+using Helpers;
 using Microsoft.Extensions.Options;
 
 namespace Services;
