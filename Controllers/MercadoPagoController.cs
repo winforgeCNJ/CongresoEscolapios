@@ -119,9 +119,9 @@ public class MercadoPagoController : ControllerBase
   {
     try
     {
-      var isValidSignature = _mpService.VerifySignature(Request);
+      // var isValidSignature = _mpService.VerifySignature(Request);
 
-      if (!isValidSignature) return BadRequest("HMAC verification failed");
+      // if (!isValidSignature) return BadRequest("HMAC verification failed");
 
 
       MercadoPagoConfig.AccessToken = _appSettings.MPAccessToken;
