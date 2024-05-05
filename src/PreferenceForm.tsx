@@ -1,3 +1,4 @@
+import { styled } from "@mui/material";
 import { DTOPreferenceReq } from "./store/DTO/Preference";
 import { ErrorMessage, FormikProvider, useFormik } from "formik";
 
@@ -21,7 +22,7 @@ const PreferenceForm = ({ formik }: Props) => {
             style={{ padding: "1rem 1rem", fontSize: "1.5rem" }}
             {...formik.getFieldProps("firstName")}
           />
-          <ErrorMessage name="firstName" component="div" style={{ color: "red" }} />
+          <ErrorMessageStyled name="firstName" component="div" />
         </div>
         <div style={{ height: "70px" }}>
           <input
@@ -31,7 +32,7 @@ const PreferenceForm = ({ formik }: Props) => {
             style={{ padding: "1rem 1rem", fontSize: "1.5rem" }}
             {...formik.getFieldProps("lastName")}
           />
-          <ErrorMessage name="lastName" component="div" style={{ color: "red" }} />
+          <ErrorMessageStyled name="lastName" component="div" />
         </div>
         <div style={{ height: "70px" }}>
           <input
@@ -41,7 +42,7 @@ const PreferenceForm = ({ formik }: Props) => {
             style={{ padding: "1rem 1rem", fontSize: "1.5rem" }}
             {...formik.getFieldProps("DNI")}
           />
-          <ErrorMessage name="DNI" component="div" style={{ color: "red" }} />
+          <ErrorMessageStyled name="DNI" component="div" />
         </div>
         <button type="submit">Pagar</button>
       </form>
@@ -50,3 +51,7 @@ const PreferenceForm = ({ formik }: Props) => {
 };
 
 export default PreferenceForm;
+
+const ErrorMessageStyled = styled(ErrorMessage)({
+  color: "red",
+});
