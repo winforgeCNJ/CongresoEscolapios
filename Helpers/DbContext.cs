@@ -16,6 +16,19 @@ public class AppDBContext : DbContext
     }
   }
 
+
+  protected override void OnModelCreating(ModelBuilder modelBuilder)
+  {
+    modelBuilder.Entity<Payment>()
+        .Property(b => b.CreateDate)
+        .HasDefaultValueSql("CURRENT_TIMESTAMP");
+
+    modelBuilder.Entity<Payment>()
+        .Property(b => b.UpdateDate)
+        .HasDefaultValueSql("CURRENT_TIMESTAMP")
+        .ValueGeneratedOnAddOrUpdate();
+  }
+
   public DbSet<Payment> PaymentTable { get; set; }
 
 }

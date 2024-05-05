@@ -32,7 +32,7 @@ public class MercadoPagoController : ControllerBase
     _mpService = mpService;
   }
 
-  [HttpPost("createReference")]
+  [HttpPost("createPreference")]
   public IActionResult CreatePreferences(DTOPreferenceReq preferenceReq)
   {
 
@@ -66,7 +66,7 @@ public class MercadoPagoController : ControllerBase
       Preference preference = client.Create(request);
 
 
-      return Ok(preference);
+      return Ok(new { preferenceId = preference.Id });
 
     }
 
@@ -119,9 +119,9 @@ public class MercadoPagoController : ControllerBase
   {
     try
     {
-      // var isValidSignature = _mpService.VerifySignature(Request);
+      var isValidSignature = _mpService.VerifySignature(Request);
 
-      // if (!isValidSignature) return BadRequest("HMAC verification failed");
+      if (!isValidSignature) return BadRequest("HMAC verification failed");
 
 
       MercadoPagoConfig.AccessToken = _appSettings.MPAccessToken;
@@ -148,8 +148,8 @@ public class MercadoPagoController : ControllerBase
         var Body = $@"
             <html>
             <body>
-                <h4>Hola {paymentFromMP.Card.Cardholder.Name}</h4>
-                <p>Estamos encantados de que hayas decidido sumarte al <i>'Congreso de Educación Humanista'</i>.</p>
+                <h4>Hola {paymentFromMP.Card.Cardholder?.Name ?? ""}</h4>
+                < p > Estamos encantados de que hayas decidido sumarte al <i>'Congreso de Educación Humanista'</i>.</p>
                 <p>Tu pago está en estado: <b>{paymentFromMP.Status}</b></p>
             </body>
             </html>";

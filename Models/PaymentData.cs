@@ -1,4 +1,6 @@
 
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace AppContext.Models;
 
 public class Payment
@@ -12,6 +14,9 @@ public class Payment
   public string FirstName { get; set; }
   public string LastName { get; set; }
   public long IdentificationNumber { get; set; }
+
+  public DateTime CreateDate { get; set; }
+  public DateTime UpdateDate { get; set; }
 
 
 }
