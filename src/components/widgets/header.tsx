@@ -5,6 +5,7 @@ import MenuButton from "./menu-button";
 import { Socials } from "./socials";
 import Logo from "./logo";
 import Menu from "./menu";
+import { cn } from "@/lib/cn";
 
 export default function Header() {
   const [mouseOverHeader, setMouseOverHeader] = useState(false);
@@ -33,9 +34,10 @@ export default function Header() {
     <header
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      className={`fixed left-0 z-50  flex w-full items-center justify-between gap-x-4 overflow-y-hidden bg-primary/60 px-6 text-white transition-all duration-500 ease-in-out lg:px-20 2xl:px-28 ${
-        visible || mouseOverHeader ? "opacity-100" : "opacity-0"
-      }`}
+      className={cn(
+        "fixed left-0 z-50  flex w-full items-center justify-between gap-x-4 overflow-y-hidden bg-primary/60 px-6 text-white transition-all duration-500 ease-in-out lg:px-20 2xl:px-28",
+        visible || mouseOverHeader ? "opacity-100" : "opacity-0",
+      )}
     >
       <Logo />
       <section className=" hidden items-center gap-x-6 lg:flex">
