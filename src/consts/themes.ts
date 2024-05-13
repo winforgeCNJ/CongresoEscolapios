@@ -1,6 +1,7 @@
 export const themes = [
   {
     id: 1,
+    isOpen : false,
     image: "/assets/themes/theme-1.webp",
     description:
       "La fe y la razón en la articulación de la propuesta educativa.",
@@ -18,6 +19,7 @@ export const themes = [
   },
   {
     id: 2,
+    isOpen : false,
     image: "/assets/themes/theme-2.webp",
     description:
       "La fe y la vida en la dinámica formativa de docentes y alumnos.",
@@ -35,6 +37,7 @@ export const themes = [
   },
   {
     id: 3,
+    isOpen : false,
     image: "/assets/themes/theme-3.webp",
     description:
       "La tradición católica,tomista y calasancia como pedagogía perenne.",

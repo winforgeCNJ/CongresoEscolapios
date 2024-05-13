@@ -8,6 +8,10 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      animation: {
+        "slide-in": "slideIn 0.6s ease-in-out", // Define the "slide-in" animation
+        "slide-out": "slideOut 0.6s ease-in-out", // Define the "slide-out" animation
+      },
       colors: {
         primary: "#1a2a48",
         secondary: "#ead5b7",

@@ -1,5 +1,5 @@
-import { Work_Sans, Alegreya } from "next/font/google";
 import Header from "@/components/widgets/header";
+import { Work_Sans } from "next/font/google";
 import type { Metadata } from "next";
 import "./globals.css";
 

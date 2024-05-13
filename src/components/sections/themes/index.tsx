@@ -1,9 +1,16 @@
-import Title from "@/components/ui/title";
+"use client";
+
 import { themes } from "@/consts/themes";
+import DropdownCard from "./dropdown-card";
+import Title from "@/components/ui/title";
 import ThemeCard from "./theme-card";
-import React from "react";
+import { useState } from "react";
 
 export default function Themes() {
+  const [themeSelect, setThemeSelect] = useState<number | null>(null);
+
+  const onOpen = (id: number) => setThemeSelect(id === themeSelect ? null : id);
+
   return (
     <section
       id="tematicas"
@@ -13,7 +20,13 @@ export default function Themes() {
         <Title title="Temáticas a" active="desarrollar" />
       </div>
       {themes.map((theme) => (
-        <ThemeCard key={theme.id} theme={theme} />
+        <ThemeCard key={theme.id} theme={theme} onOpen={onOpen}>
+          <DropdownCard
+            isOpen={themeSelect === theme.id}
+            list={theme.list}
+            title={theme.description}
+          />
+        </ThemeCard>
       ))}
     </section>
   );
