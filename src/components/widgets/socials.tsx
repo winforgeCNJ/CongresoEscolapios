@@ -10,7 +10,9 @@ export function Socials() {
           key={social.id}
           className="rounded-full bg-white/30 p-2 transition-all hover:bg-white hover:text-primary"
         >
-          <Link href={social.to}>{React.createElement(social.icon)}</Link>
+          <Link href={social.to} target="_blank" rel="noopener noreferrer">
+            {React.createElement(social.icon)}
+          </Link>
         </li>
       ))}
     </ul>

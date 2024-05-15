@@ -20,7 +20,7 @@ export async function POST(request: NextRequest) {
   try {
     await resend.emails.send({
       from: "onboarding@resend.dev",
-      to: "matias.cabrera.02.2003@gmail.com",
+      to: "congresodeeducacionhumanista@gmail.com",
       subject: `Mensaje desde web - ${name} ${lastName}`,
       html: `<p>${consult}</p>
       <p>Correo : ${mail}</p>

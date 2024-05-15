@@ -5,7 +5,7 @@ export const socials = [
   {
     id: 1,
     icon: IconInstagram,
-    to: "#umbral",
+    to: "https://www.instagram.com/congresoeducacionhumanista",
   },
   {
     id: 2,
