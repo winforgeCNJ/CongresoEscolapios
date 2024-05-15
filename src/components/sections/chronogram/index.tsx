@@ -6,7 +6,7 @@ import Title from "@/components/ui/title";
 import React, { useState } from "react";
 
 export default function Chronogram() {
-  const [chonogramSelect, setChonogramSelect] = useState<number | null>(1);
+  const [chonogramSelect, setChonogramSelect] = useState<number | null>(null);
 
   const onOpen = (id: number) => {
     if (!chonogramSelect)

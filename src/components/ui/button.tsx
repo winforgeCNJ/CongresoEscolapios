@@ -7,12 +7,14 @@ interface ButtonProps {
   onClick?: () => void;
   children: React.ReactNode;
   to?: string;
+  disabled?: boolean;
 }
 
 export default function Button({
   children,
   className,
   to,
+  disabled,
   onClick,
 }: ButtonProps) {
   const classDefault =
@@ -20,7 +22,11 @@ export default function Button({
 
   if (!to)
     return (
-      <button onClick={onClick} className={cn(classDefault, className)}>
+      <button
+        disabled={disabled}
+        onClick={onClick}
+        className={cn(classDefault, className)}
+      >
         {children}
       </button>
     );

@@ -13,7 +13,6 @@ export default function Home() {
       <Objectives />
       <Themes />
       <Chronogram />
-      <Inscription />
       <div className="relative">
         <Contact />
         <Footer />
