@@ -5,7 +5,10 @@ import React from "react";
 
 export default function Inscription() {
   return (
-    <section className="flex min-h-screen w-full flex-col items-start justify-center gap-y-8 bg-primary px-6 lg:px-20 2xl:px-28">
+    <section
+      id="inscripcion"
+      className="flex min-h-screen w-full flex-col items-start justify-center gap-y-8 bg-primary px-6 lg:px-20 2xl:px-28"
+    >
       <Title title="Inscripción" />
       <form className="w-full space-y-6 lg:px-28 2xl:px-56">
         <div className="flex w-full flex-col  gap-2 lg:flex-row lg:items-center lg:gap-12">

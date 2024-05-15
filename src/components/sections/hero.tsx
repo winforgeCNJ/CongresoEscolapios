@@ -10,7 +10,10 @@ export const alegreya = Alegreya({
 
 export default function Hero() {
   return (
-    <section className="relative flex min-h-screen w-full flex-col items-center justify-center">
+    <section
+      id="umbral"
+      className="relative flex min-h-screen w-full flex-col items-center justify-center"
+    >
       <h1
         className={`${alegreya.className} w-96 text-center text-4xl text-white lg:w-[36rem] lg:text-6xl   lg:leading-[3.6rem]`}
       >
@@ -18,7 +21,7 @@ export default function Hero() {
       </h1>
 
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2">
-        <Button to="#">Saber más</Button>
+        <Button to="#objetivos">Saber más</Button>
       </div>
 
       <div className="-top4 absolute left-0 top-0 -z-10 h-screen w-full">

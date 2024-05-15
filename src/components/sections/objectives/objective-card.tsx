@@ -19,7 +19,7 @@ export default function ObjectiveCard({
   return (
     <article
       className={cn(
-        "flex  h-[26rem] w-full flex-col items-center justify-center gap-y-4 px-6 text-white  transition-all  duration-500 lg:w-[40vw] lg:px-0",
+        "slide-in  flex h-[26rem] w-full flex-col items-center justify-center gap-y-4 px-6 text-white  transition-all  duration-500 lg:w-[40vw] lg:px-0",
         objectiveActive === card.id ? "opacity-100" : "-z-10 opacity-0",
       )}
     >

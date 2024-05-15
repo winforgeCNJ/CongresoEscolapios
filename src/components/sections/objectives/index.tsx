@@ -4,7 +4,10 @@ import React from "react";
 
 export default function Objectives() {
   return (
-    <section className="relative flex min-h-screen w-full flex-col items-center lg:flex-row">
+    <section
+      id="objetivos"
+      className="relative flex min-h-screen w-full flex-col items-center lg:flex-row"
+    >
       <div className="absolute left-12 top-12 z-20 2xl:left-28">
         <Title title="Objetivos del" active="congreso" />
       </div>

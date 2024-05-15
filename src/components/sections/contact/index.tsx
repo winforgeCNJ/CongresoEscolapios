@@ -4,7 +4,10 @@ import React from "react";
 
 export default function Contact() {
   return (
-    <section className="relative flex min-h-screen w-full items-center justify-center py-4 lg:py-0">
+    <section
+      id="contactanos"
+      className="relative flex min-h-screen w-full items-center justify-center py-4 lg:py-0"
+    >
       <form className="mb-28 w-full max-w-sm rounded-[3rem] bg-white/20 px-6 py-6 text-white lg:max-w-5xl lg:px-12 2xl:mb-0 2xl:max-w-[80rem]">
         <h2 className="text-3xl font-light lg:text-4xl 2xl:text-5xl">
           Contactanos
