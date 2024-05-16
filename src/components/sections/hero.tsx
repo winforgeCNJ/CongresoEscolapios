@@ -1,6 +1,5 @@
 import { Alegreya } from "next/font/google";
 import Button from "../ui/button";
-import Image from "next/image";
 import React from "react";
 
 export const alegreya = Alegreya({
@@ -25,7 +24,7 @@ export default function Hero() {
       </div>
 
       <div className="-top4 absolute left-0 top-0 -z-10 h-screen w-full">
-        <Image
+        <img
           alt="background hero"
           className="hidden h-full w-full lg:block"
           draggable={false}
@@ -33,7 +32,7 @@ export default function Hero() {
           height="800"
           src="/assets/backgrounds/background-hero.webp"
         />
-        <Image
+        <img
           alt="background hero "
           className="block h-full w-full lg:hidden"
           draggable={false}
