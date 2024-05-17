@@ -35,7 +35,7 @@ export default function Header() {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       className={cn(
-        "fixed left-0 z-50  flex w-full items-center justify-between gap-x-4 overflow-y-hidden bg-primary/60 px-6 text-white transition-all duration-500 ease-in-out lg:px-20 2xl:px-28",
+        "fixed left-0 z-50  flex w-full items-center justify-between gap-x-4 overflow-y-hidden bg-primary/60 px-6 py-1.5 text-white transition-all duration-500 ease-in-out lg:px-12 2xl:px-28",
         visible || mouseOverHeader ? "opacity-100" : "opacity-0",
       )}
     >

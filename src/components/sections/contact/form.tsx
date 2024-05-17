@@ -67,15 +67,13 @@ export default function Form() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="mb-28 w-full max-w-sm rounded-[3rem] bg-white/20 px-6 py-6 text-white lg:max-w-5xl lg:px-12 2xl:mb-0 2xl:max-w-[80rem]"
+      className="mb-28 w-full max-w-sm rounded-[3rem] bg-white/20 px-6 py-6 text-white lg:max-w-4xl lg:px-12 "
     >
-      <h2 className="text-3xl font-light lg:text-4xl 2xl:text-5xl">
-        Contactanos
-      </h2>
-      <p className="mb-3 text-xl font-medium 2xl:text-2xl">
+      <h2 className="text-2xl font-light">Contactanos</h2>
+      <p className="mb-4 text-base font-medium  ">
         Para saber más acerca de promociones especiales, comida o alojamiento.
       </p>
-      <div className="mb-3 flex w-full items-center justify-between gap-x-2 lg:gap-x-12">
+      <div className="mb-2 flex w-full items-center justify-between gap-x-2 lg:gap-x-12">
         <Input
           onChange={handleChange}
           name="name"
@@ -92,7 +90,7 @@ export default function Form() {
         />
       </div>
 
-      <div className="mb-3">
+      <div className="mb-2">
         <Input
           onChange={handleChange}
           name="mail"
@@ -107,7 +105,7 @@ export default function Form() {
         <label className="relative flex w-full flex-col gap-y-4">
           <textarea
             className={cn(
-              "h-56 w-full resize-none rounded-[1.5rem] border-2 bg-transparent px-6 py-4 text-lg outline-none focus:border-4 focus:border-secondary lg:h-72",
+              "h-56 w-full resize-none rounded-[1.5rem] border-2 bg-transparent px-6 py-4 text-lg outline-none focus:border-4 focus:border-secondary ",
               errors.consult && "border-red-400",
             )}
             name="consult"
@@ -116,7 +114,7 @@ export default function Form() {
           />
           <small
             className={cn(
-              "point- flex translate-y-2 items-center gap-x-2 pl-6 text-red-400 opacity-0 transition-all ease-in-out",
+              "point- flex translate-y-2 items-center gap-x-2 pl-6 text-xs text-red-400 opacity-0 transition-all ease-in-out",
               errors?.consult && "translate-y-0 opacity-100",
             )}
           >
@@ -125,10 +123,10 @@ export default function Form() {
         </label>
         <Button
           disabled={load}
-          className="mb-10 py-4 font-medium hover:tracking-normal"
+          className="mb-10 rounded-[1.2rem] px-6 py-3 font-medium hover:tracking-normal"
         >
           {load ? (
-            <IconLoad className="block w-[3.963rem] animate-spin" />
+            <IconLoad className="block w-[3.256rem] animate-spin" />
           ) : (
             "ENVIAR"
           )}

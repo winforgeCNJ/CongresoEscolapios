@@ -10,7 +10,7 @@ export default function Menu() {
           <li key={nav.id} className=" ">
             <Link
               href={nav.to}
-              className="py-6 text-2xl font-medium transition-colors hover:text-secondary lg:text-base lg:font-semibold "
+              className="py-6  font-medium transition-colors hover:text-secondary lg:text-sm  "
             >
               {nav.title}
             </Link>

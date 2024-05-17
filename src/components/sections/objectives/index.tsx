@@ -11,10 +11,10 @@ export default function Objectives() {
       <div className="absolute left-12 top-12 z-20 2xl:left-28">
         <Title title="Objetivos del" active="congreso" />
       </div>
-      <div className="h-auto lg:h-screen ">
+      <div className="h-auto w-[65vw]  lg:h-screen">
         <img
           src="/assets/objectives/objectives-image.webp"
-          className="h-full object-cover lg:w-[100vw]"
+          className="h-full w-full"
         />
       </div>
       <ObjectivesCarousel />

@@ -22,14 +22,14 @@ interface ThemeCardProps {
 export default function ThemeCard({ theme, children, onOpen }: ThemeCardProps) {
   return (
     <article className="relative h-screen w-full">
-      <img src={theme.image} alt="image" className="h-full w-full" />
-      <div className="absolute left-1/2 top-1/2 flex h-72 w-80 -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center gap-y-3 rounded-3xl bg-primary/40 px-4 text-white lg:w-96">
+      <img src={theme.image} alt="image" className="h-full w-full " />
+      <div className="absolute left-1/2 top-1/2 flex h-72 w-80  -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center gap-y-3 rounded-3xl bg-primary/40 px-4 text-white">
         <p
-          className={`${alegreya.className} mb-4 text-center text-2xl font-medium 2xl:text-3xl`}
+          className={`${alegreya.className} mb-4 w-[12.6rem] text-center text-lg font-medium `}
         >
           {theme.description}
         </p>
-        <Button onClick={() => onOpen(theme.id)} className="px-12 py-1">
+        <Button onClick={() => onOpen(theme.id)} className="px-10 py-1">
           <IconChevronDown />
         </Button>
       </div>

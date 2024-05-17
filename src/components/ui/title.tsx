@@ -9,7 +9,7 @@ interface TitleProps {
 
 export default function Title({ title, active, className }: TitleProps) {
   return (
-    <h2 className={cn("font-semibold text-white lg:text-4xl", className)}>
+    <h2 className={cn("font-semibold text-white lg:text-2xl", className)}>
       {title} <br />
       <span className="font-normal italic">{active}</span>
     </h2>

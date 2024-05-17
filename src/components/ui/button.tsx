@@ -18,7 +18,7 @@ export default function Button({
   onClick,
 }: ButtonProps) {
   const classDefault =
-    "text-primary to-secondary shadow-secondary/15 inline-block rounded-full bg-gradient-to-r from-white via-white px-8 py-2 tracking-wide shadow-lg transition-all hover:scale-[1.04] hover:tracking-widest";
+    "text-primary to-secondary shadow-secondary/15 inline-block rounded-full bg-gradient-to-r from-white via-white px-8 py-2 text-sm tracking-wide shadow-lg transition-all hover:scale-[1.04] hover:tracking-widest";
 
   if (!to)
     return (

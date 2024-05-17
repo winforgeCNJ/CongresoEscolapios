@@ -16,7 +16,7 @@ export default function Themes() {
       id="tematicas"
       className="relative grid min-h-screen grid-cols-1 lg:grid-cols-3"
     >
-      <div className="absolute left-12 top-12 z-20 2xl:left-28">
+      <div className="absolute left-10 top-12 z-20   2xl:left-28">
         <Title title="Temáticas a" active="desarrollar" />
       </div>
       {themes.map((theme) => (
