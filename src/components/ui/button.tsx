@@ -24,7 +24,10 @@ export default function Button({
     return (
       <button
         disabled={disabled}
-        onClick={onClick}
+        onClick={(e) => {
+          e.stopPropagation();
+          onClick && onClick();
+        }}
         className={cn(classDefault, className)}
       >
         {children}

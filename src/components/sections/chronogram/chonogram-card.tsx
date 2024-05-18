@@ -8,80 +8,76 @@ interface ChonogramCardProps {
   card: ChonogramI;
   onOpen: () => void;
   isOpen: boolean;
-  active: optionsChonogram | null;
+  active: optionsChonogram;
 }
 
-const HEIGHT_MIDDLE = {
-  1: "h-24 -mb-8",
-  2: "h-[88vh] lg:h-[78.8vh] ",
-  3: "h-24 -mt-8",
-};
-
-const HEIGHT_FIRST = {
-  1: "h-[88vh] lg:h-[78.8vh]  z-30",
-  2: "h-24 -mt-8 z-40",
-  3: "h-24 -mt-8 z-20",
-};
-
-const HEIGHT_LAST = {
-  1: "h-24 -mb-8 ",
-  2: "h-24 -mb-8",
-  3: "h-[88vh] lg:h-[78.8vh] ",
-};
-
 const HEIGHT_NULL = {
-  1: "min-h-[50vh] lg:min-h-[40.2vh] lg:pb-4 ",
-  2: "min-h-[50vh] lg:min-h-[40.2vh] lg:pb-4 -mt-40",
-  3: "min-h-[50vh] lg:min-h-[40.2vh] lg:pb-4 -mt-20",
+  1: "min-h-[50vh] lg:min-h-[calc(100vh-5rem)]",
+  2: "min-h-[50vh] lg:min-h-[calc(100vh-5rem)]",
+  3: "min-h-[50vh] lg:min-h-[calc(100vh-5rem)]",
 };
 
-const onHeight = (active: optionsChonogram) => {
-  const optionsHeight = {
-    1: HEIGHT_FIRST,
-    2: HEIGHT_MIDDLE,
-    3: HEIGHT_LAST,
-  };
+const TOTAL_HEIGHT = "100vh - 5rem";
+const OFFSET_HEIGHT = "80px";
 
-  return optionsHeight[active];
+const calculateTop = (active: optionsChonogram, cardId: optionsChonogram) => {
+  if (active === 3)
+    return cardId === 3
+      ? `calc(-1 * (2 * (${TOTAL_HEIGHT}) - 2 * ${OFFSET_HEIGHT}))`
+      : cardId === 2
+        ? `calc(-1 * (${TOTAL_HEIGHT} - ${OFFSET_HEIGHT}))`
+        : undefined;
+
+  if (active === 2)
+    return cardId === 3
+      ? `calc(-1 * (${TOTAL_HEIGHT} + ${OFFSET_HEIGHT}))`
+      : cardId === 2
+        ? `calc(-1 * (${TOTAL_HEIGHT} - ${OFFSET_HEIGHT}))`
+        : undefined;
+  if (active === 1)
+    return cardId === 3
+      ? `calc(-1 * (${TOTAL_HEIGHT} + ${OFFSET_HEIGHT}))`
+      : cardId === 2
+        ? `calc(-2 * ${OFFSET_HEIGHT})`
+        : undefined;
 };
 
-const onIndex = (active: optionsChonogram | null, id: optionsChonogram) => {
-  if (active === 1 && id === 2) return 40;
-  if (active === id) return 50;
-
-  return id * 10;
-};
-
+const onIndex = (id: optionsChonogram) => id * 10;
 export default function ChonogramCard({
   card,
-  isOpen,
   onOpen,
   active,
 }: ChonogramCardProps) {
-  const zIndex = onIndex(active, card.id);
+  const zIndex = onIndex(card.id);
+  const height = HEIGHT_NULL[card.id];
 
-  const height = !active ? HEIGHT_NULL[card.id] : onHeight(active)[card.id];
+  const top = calculateTop(active, card.id);
 
   return (
-    <article onClick={onOpen} className={cn(" ", `z-${zIndex}`)}>
+    <article
+      onClick={onOpen}
+      className={cn(
+        " ",
+        `z-${zIndex} -w-full relative cursor-pointer transition-all duration-300 hover:mb-4`,
+        `${height}`,
+      )}
+      style={{ top: top }}
+    >
       <div
         className={cn(
-          "border-primary-2 w-full cursor-pointer overflow-hidden rounded-tl-[3rem] rounded-tr-[3rem]  border-4 border-primary bg-primary bg-gradient-to-r from-white/40 via-white/40  to-secondary px-12 pt-12  text-white shadow-2xl transition-all duration-300  hover:-translate-y-2  lg:pb-4  2xl:pb-0",
+          "border-primary-2  w-full cursor-pointer rounded-t-[2rem] border-4 border-primary bg-primary bg-gradient-to-b from-white/40 via-white/40  to-secondary px-12 pt-4  text-white shadow-2xl transition-all duration-300  hover:mb-4  lg:pb-4  2xl:pb-0",
           `${height}`,
         )}
       >
-        <section className="relative mb-6 flex w-full flex-col justify-between lg:flex-row lg:items-center">
-          <h3 className=" w-56 text-xl font-bold uppercase  italic ">
-            {card.date}
-          </h3>
-          <div className=" text-lg font-medium">
+        <section className="relative mb-2 flex w-full flex-col justify-between px-4 lg:flex-row lg:items-center">
+          <h3 className=" w-4/4 text-xl font-bold uppercase  ">{card.date}</h3>
+          <div className=" text-sm font-medium">
             <p>{card.to}</p>
             <p className="lg:text-end">{card.to2}</p>
           </div>
           <span
             className={cn(
-              "pointer-events-none absolute -right-8 -top-6 opacity-0 transition-opacity ",
-              isOpen && "pointer-events-auto opacity-100",
+              "pointer-events-none absolute -right-8 -top-0 opacity-0 transition-opacity ",
             )}
           >
             <IconPin />
@@ -91,7 +87,7 @@ export default function ChonogramCard({
         <div
           className={cn(
             "duration-400 pointer-events-none absolute translate-y-2 opacity-0 transition-all ease-in-out",
-            isOpen && "pointer-events-auto static translate-y-0 opacity-100",
+            "pointer-events-auto static translate-y-0 opacity-100",
           )}
         >
           <h4 className="mb-1  font-medium ">

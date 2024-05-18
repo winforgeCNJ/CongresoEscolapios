@@ -8,13 +8,10 @@ import React, { useState } from "react";
 export type optionsChonogram = 1 | 2 | 3;
 
 export default function Chronogram() {
-  const [chonogramSelect, setChonogramSelect] =
-    useState<optionsChonogram | null>(null);
+  const [chonogramSelect, setChonogramSelect] = useState<optionsChonogram>(3);
 
   const onOpen = (id: optionsChonogram) => {
-    if (!chonogramSelect)
-      setChonogramSelect(id === chonogramSelect ? null : id);
-    else setChonogramSelect(null);
+    setChonogramSelect((prevId) => (prevId === id ? 3 : id));
   };
 
   return (
@@ -22,8 +19,11 @@ export default function Chronogram() {
       id="cronograma"
       className="flex flex-col bg-primary lg:h-screen  lg:flex-row "
     >
-      <section className="flex-1 pt-12">
-        <Title title="Cronograma" className="pl-12" />
+      <section className="flex-1">
+        <Title
+          title="Cronograma"
+          className="flex h-[5rem] items-center pl-12"
+        />
         <div className="relative flex flex-col overflow-hidden  lg:h-[calc(100vh-5rem)]">
           {chonogram.map((item) => (
             <ChonogramCard
