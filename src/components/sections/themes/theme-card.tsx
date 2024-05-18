@@ -17,11 +17,17 @@ interface ThemeCardProps {
   };
   children: React.ReactNode;
   onOpen: (id: number) => void;
+  onClose: () => void;
 }
 
-export default function ThemeCard({ theme, children, onOpen }: ThemeCardProps) {
+export default function ThemeCard({
+  theme,
+  children,
+  onOpen,
+  onClose,
+}: ThemeCardProps) {
   return (
-    <article className="relative h-screen w-full">
+    <article className="relative h-screen w-full" onClick={onClose}>
       <img src={theme.image} alt="image" className="h-full w-full " />
       <div className="absolute left-1/2 top-1/2 flex h-72 w-80  -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center gap-y-3 rounded-3xl bg-primary/40 px-4 text-white">
         <p

@@ -10,6 +10,7 @@ export default function Themes() {
   const [themeSelect, setThemeSelect] = useState<number | null>(null);
 
   const onOpen = (id: number) => setThemeSelect(id === themeSelect ? null : id);
+  const onClose = () => setThemeSelect(null);
 
   return (
     <section
@@ -20,11 +21,17 @@ export default function Themes() {
         <Title title="Temáticas a" active="desarrollar" />
       </div>
       {themes.map((theme) => (
-        <ThemeCard key={theme.id} theme={theme} onOpen={onOpen}>
+        <ThemeCard
+          key={theme.id}
+          theme={theme}
+          onOpen={onOpen}
+          onClose={onClose}
+        >
           <DropdownCard
             isOpen={themeSelect === theme.id}
             list={theme.list}
             title={theme.description}
+            onClose={onClose}
           />
         </ThemeCard>
       ))}
