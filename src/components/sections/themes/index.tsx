@@ -9,7 +9,9 @@ import { useState } from "react";
 export default function Themes() {
   const [themeSelect, setThemeSelect] = useState<number | null>(null);
 
-  const onOpen = (id: number) => setThemeSelect(id === themeSelect ? null : id);
+  const onOpen = (id: number) => {
+    setThemeSelect(id === themeSelect ? null : id);
+  };
   const onClose = () => setThemeSelect(null);
 
   return (
