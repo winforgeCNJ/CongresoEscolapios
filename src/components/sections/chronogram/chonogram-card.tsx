@@ -90,7 +90,7 @@ export default function ChonogramCard({
         </section>
         <div
           className={
-            "mt-4 flex h-full flex-col gap-4 overflow-auto lg:flex-row"
+            "mt-4 flex h-full flex-col gap-6 overflow-auto lg:flex-row"
           }
           style={{
             height: isOpen
@@ -103,8 +103,10 @@ export default function ChonogramCard({
               {card.morningDescription.title}
             </h4>
             <ul>
-              {card.morningDescription.coursesHours.map((el) => (
-                <li className={"text-base"}>{el}</li>
+              {card.morningDescription.coursesHours.map((el, index) => (
+                <li className={"text-base"} key={index}>
+                  {el}
+                </li>
               ))}
             </ul>
           </div>
@@ -113,8 +115,10 @@ export default function ChonogramCard({
               {card.afternoonDescription?.title}
             </h4>
             <ul>
-              {card.afternoonDescription?.coursesHours.map((el) => (
-                <li className={"text-base"}>{el}</li>
+              {card.afternoonDescription?.coursesHours.map((el, index) => (
+                <li className={"text-base"} key={index}>
+                  {el}
+                </li>
               ))}
             </ul>
           </div>
