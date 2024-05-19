@@ -1,14 +1,13 @@
+import emailjs from '@emailjs/browser';
 import { InitialValuesT } from "./form";
-
 export async function sendEmail(values: InitialValuesT) {
-  const config = {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(values),
-  };
-  const res = await fetch("/api/mail", config);
-  const data = await res.json();
-  return data;
+ const serviceId = process.env.NEXT_PUBLIC_SERVICE_ID
+ const templateId = process.env.NEXT_PUBLIC_TEMPLATE_ID
+ const publicKey = process.env.NEXT_PUBLIC_EMAIL_PUBLIC_ID
+
+
+ const result = await emailjs.send(serviceId!, templateId!, values, publicKey)
+
+ return result
+  
 }

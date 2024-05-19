@@ -12,24 +12,24 @@ import * as Yup from "yup";
 import { cn } from "@/lib/cn";
 
 export type InitialValuesT = {
-  name: string;
-  lastName: string;
-  mail: string;
-  consult: string;
+  user_name: string;
+  last_name: string;
+  email: string;
+  consulta: string;
 };
 
 const initialValues: InitialValuesT = {
-  name: "",
-  lastName: "",
-  mail: "",
-  consult: "",
+  user_name: "",
+  last_name: "",
+  email: "",
+  consulta: "",
 };
 
 const validationSchema = Yup.object({
-  mail: Yup.string().email("Correo no valido").required("El correo requrido"),
-  name: Yup.string().required("El nombre es requrido"),
-  lastName: Yup.string().required("El apellido es requrido"),
-  consult: Yup.string()
+  email: Yup.string().email("Correo no valido").required("El correo requrido"),
+  user_name: Yup.string().required("El nombre es requrido"),
+  last_name: Yup.string().required("El apellido es requrido"),
+  consulta: Yup.string()
     .required("La consulta es requrida")
     .min(6, "La consulta debe tener alemenos 6 caracteres"),
 });
@@ -42,21 +42,18 @@ export default function Form() {
     setLoad(true);
     try {
       const res = await sendEmail(values);
-
-      if (res.type === "error") {
-        setStatus("error");
-        setTimeout(() => {
-          setStatus('iddle')
-        }, 8000)
-        return;
+      if (res.text !== 'OK') {
+        setStatus('error')
       }
-
-      setStatus("success");
+      
+      setStatus('success')
+     
     } catch (error) {
       console.log(error);
     } finally {
       setLoad(false);
     }
+
   };
 
   const { handleChange, errors, handleSubmit } = useFormik({
@@ -87,28 +84,28 @@ export default function Form() {
       <div className="mb-2 flex-col lg:flex-row flex w-full items-center justify-between gap-x-2 lg:gap-x-12">
         <Input
           onChange={handleChange}
-          name="name"
+          name="user_name"
           placeholder="NOMBRE"
-          error={errors?.name}
-          className={`${errors.name && "border-red-400"}`}
+          error={errors?.user_name}
+          className={`${errors.user_name && "border-red-400"}`}
         />
         <Input
           onChange={handleChange}
-          name="lastName"
+          name="last_name"
           placeholder="APELLIDO"
-          error={errors?.lastName}
-          className={`${errors.lastName && "border-red-400"}`}
+          error={errors?.last_name}
+          className={`${errors.last_name && "border-red-400"}`}
         />
       </div>
 
       <div className="mb-2">
         <Input
           onChange={handleChange}
-          name="mail"
+          name="email"
           placeholder="MAIL"
           type="email"
-          className={` ${errors.mail && "border-red-400"}`}
-          error={errors?.mail}
+          className={` ${errors.email && "border-red-400"}`}
+          error={errors?.email}
         />
       </div>
 
@@ -117,19 +114,19 @@ export default function Form() {
           <textarea
             className={cn(
               "h-56 w-full resize-none rounded-[1.5rem] border-2 bg-transparent px-6 py-4 text-lg outline-none focus:border-4 focus:border-secondary ",
-              errors.consult && "border-red-400",
+              errors.consulta && "border-red-400",
             )}
-            name="consult"
+            name="consulta"
             placeholder="TU CONSULTA"
             onChange={handleChange}
           />
           <small
             className={cn(
               "point- flex translate-y-2 items-center gap-x-2 pl-6 text-xs text-red-400 opacity-0 transition-all ease-in-out",
-              errors?.consult && "translate-y-0 opacity-100",
+              errors?.consulta && "translate-y-0 opacity-100",
             )}
           >
-            <IconError /> {errors.consult}
+            <IconError /> {errors.consulta}
           </small>
         </label>
         <Button
