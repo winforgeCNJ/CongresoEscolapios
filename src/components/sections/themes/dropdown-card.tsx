@@ -1,5 +1,5 @@
 import { Alegreya } from "next/font/google";
-import React from "react";
+import React, { useEffect, useRef } from "react";
 
 export const alegreya = Alegreya({
   subsets: ["latin"],
@@ -19,8 +19,33 @@ export default function DropdownCard({
   isOpen,
   onClose,
 }: DropdownCardProps) {
+
+  const dropdownRef = useRef<HTMLDivElement>(null)
+
+  const handleClickOutsideModal = (event: any) => {
+    if (
+      isOpen &&
+      !dropdownRef?.current?.contains(event.target) 
+    ) {
+      onClose();
+    }
+  };
+
+  useEffect(() => {
+    if (isOpen) {
+      document.addEventListener('mousedown', handleClickOutsideModal);
+    } else {
+      document.removeEventListener('mousedown', handleClickOutsideModal);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutsideModal);
+    };
+  }, [isOpen]);
+
   return (
     <section
+      ref={dropdownRef}
       className={`${isOpen ? "z-40 opacity-100" : " pointer-events-none opacity-0"} absolute left-0 top-0 flex h-full w-full flex-col gap-y-4  overflow-y-auto border-b border-white bg-primary px-4 py-12 transition-opacity lg:gap-y-6 2xl:gap-y-12 `}
       onClick={onClose}
     >
