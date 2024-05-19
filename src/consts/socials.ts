@@ -10,6 +10,6 @@ export const socials = [
   {
     id: 2,
     icon: IconWhatsapp,
-    to: "https://api.whatsapp.com/send?phone=",
+    to: "https://api.whatsapp.com/send?phone=5493584393164",
   },
 ];

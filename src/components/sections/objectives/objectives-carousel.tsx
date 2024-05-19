@@ -29,10 +29,10 @@ export default function ObjectivesCarousel() {
 
   return (
     <section
-      className="flex h-screen w-full lg:w-auto flex-col items-center justify-center gap-y-4 bg-primary relative cursor-grab"
+      className="flex h-screen w-full lg:w-auto flex-col items-center justify-center gap-y-4 bg-primary relative "
       style={{ touchAction: 'none' }}
     >
-      <div className="bg-primary w-full h-full lg:w-[40vw] pointer-events-none">
+      <div className="bg-primary w-full h-full lg:w-[40vw] ">
         {objectives.map((objective) => (
        
            <ObjectiveCard
