@@ -8,9 +8,9 @@ export function Socials() {
       {socials.map((social) => (
         <li
           key={social.id}
-          className="rounded-full bg-white/30 p-2 transition-all hover:bg-white hover:text-primary"
+          className="rounded-full bg-white/30  transition-all hover:bg-white hover:text-primary"
         >
-          <Link href={social.to} target="_blank" rel="noopener noreferrer">
+          <Link href={social.to} target="_blank" rel="noopener noreferrer" className="p-2 block">
             {React.createElement(social.icon)}
           </Link>
         </li>

@@ -87,14 +87,14 @@ export default function Form() {
           name="user_name"
           placeholder="NOMBRE"
           error={errors?.user_name}
-          className={`${errors.user_name && "border-red-400"}`}
+          className={`${errors.user_name && "border-red-400 "}`}
         />
         <Input
           onChange={handleChange}
           name="last_name"
           placeholder="APELLIDO"
           error={errors?.last_name}
-          className={`${errors.last_name && "border-red-400"}`}
+          className={`${errors.last_name && "border-red-400 mt-2 lg:mt-0"}`}
         />
       </div>
 
