@@ -50,6 +50,7 @@ export default function Form() {
      
     } catch (error) {
       console.log(error);
+      setStatus('error')
     } finally {
       setLoad(false);
     }
