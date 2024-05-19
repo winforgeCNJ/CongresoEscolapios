@@ -11,16 +11,19 @@ export default function MenuButton() {
 
   return (
     <>
-      <button onClick={onMenu} className="z-40 block text-white lg:hidden">
+      <button onClick={onMenu} className="z-[9999] block text-white lg:hidden">
         {menu ? <IconClose /> : <IconMenu />}
       </button>
 
       <aside
-        className={`${menu ? "left-0" : "-left-full"} fixed top-0 z-30 flex h-screen w-full flex-col items-center justify-center gap-y-4 bg-primary/60 text-white transition-all duration-200 ease-in-out lg:hidden`}
+        className={`${menu ? "right-0" : "-right-full"} fixed top-0 z- flex h-screen   flex-col items-center justify-center gap-y-4 w-64 bg-primary text-white transition-all duration-200 ease-in-out lg:hidden`}
       >
         <Menu />
         <Socials />
+      
       </aside>
+
+      
     </>
   );
 }

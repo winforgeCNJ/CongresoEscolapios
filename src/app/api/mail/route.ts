@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 
-const API_KEY = "re_TjRHtmd7_C6fJe3LhkGbukUHaTow4XTeg";
+const API_KEY = process.env.RESEND_KEY;
 
 const resend = new Resend(API_KEY);
 
@@ -18,7 +18,7 @@ export async function POST(request: NextRequest) {
   const { mail, consult, name, lastName } = body;
 
   try {
-    await resend.emails.send({
+    const result = await resend.emails.send({
       from: "onboarding@resend.dev",
       to: "congresodeeducacionhumanista@gmail.com",
       subject: `Mensaje desde web - ${name} ${lastName}`,
@@ -26,6 +26,16 @@ export async function POST(request: NextRequest) {
       <p>Correo : ${mail}</p>
       `,
     });
+
+    if (result?.error) {
+      return NextResponse.json(
+        {
+          message: "Ocurrio un error al enviar el mail",
+          type: "error",
+        },
+        { status: 403 },
+      );
+    }
 
     return NextResponse.json(
       {
