@@ -8,7 +8,7 @@ export const themes = [
     list: [
       "Forja del Carácter",
       "La formación catequista y el proceso pastoral.",
-      "La educación sexual integral en la Escuelas Católicas.",
+      "La educación sexual integral en las Escuelas Católicas.",
       "El proceso de la pastoral infantil y juvenil integrado en el planteo curricual de la escuela católica.",
       "La atención pastoral y la formación de las familias que se acercan ala propuesta escolar.",
       "Pantallas sí o pantallas no en la escuela y en el hogar.",
@@ -26,7 +26,7 @@ export const themes = [
     list: [
       "Forja del Carácter",
       "La formación catequista y el proceso pastoral.",
-      "La educación sexual integral en la Escuelas Católicas.",
+      "La educación sexual integral en las Escuelas Católicas.",
       "El proceso de la pastoral infantil y juvenil integrado en el planteo curricual de la escuela católica.",
       "La atención pastoral y la formación de las familias que se acercan ala propuesta escolar.",
       "Pantallas sí o pantallas no en la escuela y en el hogar.",
@@ -44,7 +44,7 @@ export const themes = [
     list: [
       "Forja del Carácter",
       "La formación catequista y el proceso pastoral.",
-      "La educación sexual integral en la Escuelas Católicas.",
+      "La educación sexual integral en las Escuelas Católicas.",
       "El proceso de la pastoral infantil y juvenil integrado en el planteo curricual de la escuela católica.",
       "La atención pastoral y la formación de las familias que se acercan ala propuesta escolar.",
       "Pantallas sí o pantallas no en la escuela y en el hogar.",

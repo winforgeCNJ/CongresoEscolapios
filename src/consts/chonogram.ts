@@ -20,8 +20,8 @@ export const chonogram: ChonogramI[] = [
     id: 1,
     hostImg : '/assets/chonogram/catherine.webp',
     date: "Viernes 30 de agosto",
-    to: "De 8:30 a 12:40hs",
-    to2: "De 15:15 a 19hs",
+    to: "De 8:00 a 13:30hs",
+    to2: "De 15:15 a 20hs",
     isOpen: false,
     morningDescription: {
       title: "Mañana",
@@ -57,8 +57,8 @@ export const chonogram: ChonogramI[] = [
     id: 2,
     hostImg : '/assets/chonogram/carlos-torrendell.webp',
     date: "Sábado 31 de agosto",
-    to: "De 8:30 a 12:40hs",
-    to2: "De 15:15 a 19hs",
+    to: "De 8:30 a 13:30hs",
+    to2: "De 15:15 a 20hs",
     isOpen: false,
     morningDescription: {
       title: "Mañana",
@@ -89,7 +89,7 @@ export const chonogram: ChonogramI[] = [
     id: 3,
     hostImg : '/assets/chonogram/paola-delbosco.webp',
     date: "Domingo 1 de septiembre",
-    to: "De 8:30 a 12:40hs",
+    to: "De 8:30 a 12:30hs",
     isOpen: false,
     morningDescription: {
       title: "Mañana",
