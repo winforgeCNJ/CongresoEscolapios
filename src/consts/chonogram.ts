@@ -1,5 +1,6 @@
 export interface ChonogramI {
   id: 1 | 2 | 3;
+  hostImg : string
   date: string;
   to: string;
   to2?: string;
@@ -17,6 +18,7 @@ export interface ChonogramI {
 export const chonogram: ChonogramI[] = [
   {
     id: 1,
+    hostImg : '/assets/chonogram/catherine.webp',
     date: "Viernes 30 de agosto",
     to: "De 8:30 a 12:40hs",
     to2: "De 15:15 a 19hs",
@@ -53,6 +55,7 @@ export const chonogram: ChonogramI[] = [
   },
   {
     id: 2,
+    hostImg : '/assets/chonogram/carlos-torrendell.webp',
     date: "Sábado 31 de agosto",
     to: "De 8:30 a 12:40hs",
     to2: "De 15:15 a 19hs",
@@ -84,6 +87,7 @@ export const chonogram: ChonogramI[] = [
   },
   {
     id: 3,
+    hostImg : '/assets/chonogram/paola-delbosco.webp',
     date: "Domingo 1 de septiembre",
     to: "De 8:30 a 12:40hs",
     isOpen: false,
