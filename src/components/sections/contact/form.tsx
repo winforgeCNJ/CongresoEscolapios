@@ -44,6 +44,11 @@ export default function Form() {
       const res = await sendEmail(values);
       if (res.text !== 'OK') {
         setStatus('error')
+
+        setTimeout(() => {
+          setStatus('iddle')
+        }, 8000)
+        return
       }
       
       setStatus('success')
@@ -51,6 +56,9 @@ export default function Form() {
     } catch (error) {
       console.log(error);
       setStatus('error')
+      setTimeout(() => {
+        setStatus('iddle')
+      }, 8000)
     } finally {
       setLoad(false);
     }
