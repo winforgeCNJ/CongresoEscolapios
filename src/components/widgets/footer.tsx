@@ -8,7 +8,7 @@ import Menu from "./menu";
 
 export default function Footer() {
   return (
-    <footer className='2xl:px-28" absolute bottom-0 left-0  z-50 flex w-full items-center justify-between gap-x-4 overflow-y-hidden bg-primary/60 px-6 text-white transition-all duration-500 ease-in-out lg:px-20 pt-2'>
+    <footer className='2xl:px-28" absolute bottom-0 left-0  z-50  w-full items-center justify-between gap-x-4 overflow-y-hidden bg-primary/60 px-6 text-white transition-all duration-500 ease-in-out lg:px-20 pt-2 hidden lg:flex'>
       <Logo />
       <section className=" hidden items-center gap-x-6 lg:flex">
         <Menu />
