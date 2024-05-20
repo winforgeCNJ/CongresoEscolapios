@@ -3,7 +3,6 @@ import Objectives from "@/components/sections/objectives";
 import Chronogram from "@/components/sections/chronogram";
 import Contact from "@/components/sections/contact";
 import Themes from "@/components/sections/themes";
-import Footer from "@/components/widgets/footer";
 import Hero from "@/components/sections/hero";
 
 export default function Home() {
@@ -14,10 +13,8 @@ export default function Home() {
       <Objectives />
       <Themes />
       <Chronogram />
-      <div className="relative">
-        <Contact />
-        <Footer />
-      </div>
+      <Inscription />
+      <Contact />
     </main>
   );
 }
