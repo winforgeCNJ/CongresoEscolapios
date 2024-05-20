@@ -36,7 +36,7 @@ export default function Chronogram() {
           ))}
         </div>
       </section>
-      <div className="hidden h-screen  basis-1/2 lg:block">
+      <div className="hidden h-screen lg:block">
         <img
           src={chonogram[chonogramSelect - 1]?.hostImg}
           className="h-screen w-full object-cover object-[40%_20%]"
