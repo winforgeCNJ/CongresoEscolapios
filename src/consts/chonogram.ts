@@ -1,6 +1,6 @@
 export interface ChonogramI {
   id: 1 | 2 | 3;
-  hostImg : string
+  hostImg: string;
   date: string;
   to: string;
   to2?: string;
@@ -18,7 +18,7 @@ export interface ChonogramI {
 export const chonogram: ChonogramI[] = [
   {
     id: 1,
-    hostImg : '/assets/chonogram/catherine.webp',
+    hostImg: "/assets/chonogram/catherine.webp",
     date: "Viernes 30 de agosto",
     to: "De 8:00 a 13:30hs",
     to2: "De 15:15 a 20hs",
@@ -28,7 +28,7 @@ export const chonogram: ChonogramI[] = [
       coursesHours: [
         "8:00 Acreditación",
         "8:30 Apertura y presentación",
-        "9:00 Dr. Carlos Torrendell",
+        "9:00 Dr. Carlos Torrendell (A confirmar)",
         "9:30 Dr. Horacio Ferreyra",
         "10:00 Dra. Catherine L'Ecuyer",
         "10:45 Preguntas",
@@ -55,7 +55,7 @@ export const chonogram: ChonogramI[] = [
   },
   {
     id: 2,
-    hostImg : '/assets/chonogram/carlos-torrendell.webp',
+    hostImg: "/assets/chonogram/carlos-torrendell.webp",
     date: "Sábado 31 de agosto",
     to: "De 8:30 a 13:30hs",
     to2: "De 15:15 a 20hs",
@@ -87,7 +87,7 @@ export const chonogram: ChonogramI[] = [
   },
   {
     id: 3,
-    hostImg : '/assets/chonogram/paola-delbosco.webp',
+    hostImg: "/assets/chonogram/paola-delbosco.webp",
     date: "Domingo 1 de septiembre",
     to: "De 8:30 a 12:30hs",
     isOpen: false,

@@ -88,8 +88,8 @@ export default function ChonogramCard({
             </h3>
           </div>
           <div className="flex w-full justify-between text-xs font-medium">
-            <p>{card.to}</p>
-            <p className="lg:text-end">{card.to2}</p>
+            <p className="text-base">{card.to}</p>
+            <p className="text-base lg:text-end">{card.to2}</p>
           </div>
         </section>
         <div
