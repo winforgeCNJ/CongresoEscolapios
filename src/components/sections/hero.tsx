@@ -26,7 +26,7 @@ export default function Hero() {
       <div className="-top4 absolute left-0 top-0 -z-10 h-screen w-full">
         <img
           alt="background hero"
-          className="hidden h-full w-full lg:block"
+          className="hidden h-full w-full object-cover  object-center lg:block"
           draggable={false}
           width="1440"
           height="800"
@@ -34,7 +34,7 @@ export default function Hero() {
         />
         <img
           alt="background hero "
-          className="block h-full w-full lg:hidden"
+          className="block h-full w-full object-cover  object-center lg:hidden"
           draggable={false}
           width="420"
           height="720"

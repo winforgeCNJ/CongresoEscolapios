@@ -14,7 +14,7 @@ const config: Config = {
       },
       colors: {
         primary: "#1a2a48",
-        secondary: "#ead5b7",
+        secondary: "#aaa587",
         "box-dropdown": "#6b7485",
       },
     },

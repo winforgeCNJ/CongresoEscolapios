@@ -42,15 +42,15 @@ const calculateTop = (active: optionsChonogram, cardId: optionsChonogram) => {
         : undefined;
 };
 
-const backgroundColor = (cardId : optionsChonogram) => {
+const backgroundColor = (cardId: optionsChonogram) => {
   const colors = {
-    1 : 'bg-[#284980]',
-    2 : 'bg-[#767f91]',
-    3 : 'bg-secondary'
-  }
+    1: "bg-[#284980]",
+    2: "bg-[#767f91]",
+    3: "bg-secondary",
+  };
 
-  return colors[cardId]
-}
+  return colors[cardId];
+};
 
 const onIndex = (id: optionsChonogram) => id * 10;
 export default function ChonogramCard({
@@ -62,40 +62,35 @@ export default function ChonogramCard({
   const zIndex = onIndex(card.id);
   const height = HEIGHT_NULL[card.id];
   const top = calculateTop(active, card.id);
-  const background = backgroundColor(card.id)
-
+  const background = backgroundColor(card.id);
 
   return (
     <article
       onClick={onOpen}
       className={cn(
         " ",
-        `z-${zIndex} w-full relative cursor-pointer rounded-[2rem] transition-all duration-300 hover:mb-4 `,
+        `z-${zIndex} relative w-full cursor-pointer rounded-[2rem] transition-all duration-300 hover:mb-4 `,
         `${height}`,
-        `bg-${background}`
+        `bg-${background}`,
       )}
       style={{ top: top }}
     >
       <div
         className={cn(
           "container w-full cursor-pointer rounded-[2rem] border-4 border-primary px-8  pt-4 text-white shadow-2xl transition-all  duration-300  hover:mb-4  lg:pb-4 2xl:pb-0",
-          `${height} ${background}`, 
+          `${height} ${background}`,
         )}
       >
         <section className="relative flex w-full flex-col items-start justify-between border-b-2 pb-2">
-          <div className="w-full flex items-center justify-between">
+          <div className="flex w-full items-center justify-between">
             <h3 className=" w-4/4 text-base font-bold uppercase  ">
               {card.date}
             </h3>
-            
-
-
           </div>
           <div className="flex w-full justify-between text-xs font-medium">
             <p>{card.to}</p>
             <p className="lg:text-end">{card.to2}</p>
           </div>
-         
         </section>
         <div
           className={
@@ -109,11 +104,9 @@ export default function ChonogramCard({
         >
           <div className="w-full lg:w-1/2">
             <div className="flex items-center justify-between">
-
               <h4 className="mb-1 text-xl font-bold uppercase">
                 {card.morningDescription.title}
               </h4>
-           
             </div>
             <ul>
               {card.morningDescription.coursesHours.map((el, index) => (

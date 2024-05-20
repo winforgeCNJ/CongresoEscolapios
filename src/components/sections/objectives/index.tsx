@@ -2,7 +2,6 @@ import ObjectivesCarousel from "./objectives-carousel";
 import Title from "@/components/ui/title";
 import React from "react";
 
-
 export default function Objectives() {
   return (
     <section
@@ -12,10 +11,10 @@ export default function Objectives() {
       <div className="absolute left-12 top-12 z-20 2xl:left-28">
         <Title title="Objetivos del" active="congreso" />
       </div>
-      <div className="h-auto w-[65vw]  lg:h-screen hidden lg:block">
+      <div className="hidden h-auto  w-[65vw] lg:block lg:h-screen">
         <img
           src="/assets/objectives/objectives-image.webp"
-          className="h-full w-full"
+          className="h-full w-full object-cover object-center"
         />
       </div>
       <ObjectivesCarousel />

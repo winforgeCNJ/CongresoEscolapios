@@ -17,14 +17,14 @@ export default function Chronogram() {
   return (
     <section
       id="cronograma"
-      className="flex flex-col bg-primary h-auto lg:h-screen  lg:flex-row "
+      className="flex h-auto flex-col bg-primary lg:h-screen  lg:flex-row "
     >
       <section className="flex-1">
         <Title
           title="Cronograma"
           className="flex h-[5rem] items-center pl-12"
         />
-        <div className="relative basis-8/12 flex flex-col w-full overflow-hidden h-[100dvh]  lg:h-[calc(100vh-5rem)] ">
+        <div className="relative flex h-[100dvh] w-full basis-8/12 flex-col overflow-hidden  lg:h-[calc(100vh-5rem)] ">
           {chonogram.map((item) => (
             <ChonogramCard
               key={item.id}
@@ -36,10 +36,10 @@ export default function Chronogram() {
           ))}
         </div>
       </section>
-      <div className="h-screen basis-1/2  hidden lg:block">
+      <div className="hidden h-screen  basis-1/2 lg:block">
         <img
           src={chonogram[chonogramSelect - 1]?.hostImg}
-          className="h-screen w-full "
+          className="h-screen w-full object-cover object-[40%_20%]"
         />
       </div>
     </section>
