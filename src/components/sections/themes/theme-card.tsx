@@ -28,8 +28,12 @@ export default function ThemeCard({
 }: ThemeCardProps) {
   return (
     <article className="relative h-screen w-full" onClick={onClose}>
-      <img src={theme.image} alt="image" className="h-full w-full " />
-      <div className="absolute left-1/2 top-1/2 flex h-72 w-80  -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center gap-y-3 rounded-3xl bg-primary/40 px-4 text-white">
+      <img
+        src={theme.image}
+        alt="image"
+        className="h-full w-full object-cover object-center"
+      />
+      <div className="absolute left-1/2 top-1/2 flex h-72 w-80  -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center gap-y-3 rounded-3xl bg-primary/50 px-4 text-white">
         <p
           className={`${alegreya.className} mb-4 w-[12.6rem] text-center text-lg font-medium `}
         >
