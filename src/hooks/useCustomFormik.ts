@@ -9,21 +9,21 @@ interface Props {
   onSubmit: (preferenciId: string) => void;
 }
 
-const MySwal = withReactContent(Swal);
+export const MySwal = withReactContent(Swal);
 const useCustomFormik = ({ onSubmit }: Props) => {
   const [createPreference] = usePostPreferenceMutation();
   const formik = useFormik<DTOPreferenceReq>({
     initialValues: { firstName: "", lastName: "", DNI: "", mail : "", phoneNumber : "" },
     validationSchema: Yup.object({
-      firstName: Yup.string().min(2, "Al menos 2 caracteres").max(70, "El maximo de caracteres es de 70").required("Campo requerido"),
-      lastName: Yup.string().min(2, "Al menos 2 caracteres").max(70, "El maximo de caracteres es de 70").required("Campo requerido"),
+      firstName: Yup.string().min(2, "Al menos 2 caracteres").max(25, "El maximo de caracteres es de 25").required("Campo requerido"),
+      lastName: Yup.string().min(2, "Al menos 2 caracteres").max(25, "El maximo de caracteres es de 25").required("Campo requerido"),
       DNI: Yup.number()
         .typeError("El campo debe ser numerico")
         .positive("El valor debe ser positivo")
         .integer("El valor debe ser entero")
         .min(999999, "Al menos 7 caracteres")
         .required("Campo requerido"),
-      mail : Yup.string().min(6, "Almenos 6 caracteres").max(70, "El maximo de caracteres es de 70").required("Campo requerido").email('Correo no valido'),
+      mail : Yup.string().min(6, "Almenos 6 caracteres").max(12, "El maximo de caracteres es de 12").required("Campo requerido").email('Correo no valido'),
       phoneNumber : Yup.number().typeError("El campo debe ser numerico")
       .positive("El valor debe ser positivo")
       .integer("El valor debe ser entero")
@@ -31,33 +31,23 @@ const useCustomFormik = ({ onSubmit }: Props) => {
       .required("Campo requerido"),
         
     }),
-    onSubmit:  ({ firstName, lastName, DNI, mail, phoneNumber }) => {
+    onSubmit: async ({ firstName, lastName, DNI, mail, phoneNumber }) => {
       MySwal.showLoading();
-    //   try {
-    //     const response = await createPreference(new DTOPreferenceReq(firstName, lastName, DNI, email, phone));
-    //     if ("error" in response) throw response.error;
+      try {
+        const response = await createPreference(new DTOPreferenceReq(firstName, lastName, DNI, phoneNumber, mail));
+        if ("error" in response) throw response.error;
 
-    //     response.data;
-    //     Swal.close();
-    //     onSubmit(response.data.preferenceId);
-    //   } catch (error) {
-    //     Swal.close();
-    //     MySwal.fire({
-    //       title: "Error",
-    //       text: "Hubo un problema al enviar los valores.",
-    //       icon: "error",
-    //     });
-    //   }
-    onSubmit('Preferencia #1')
-    console.log('Se manda las preferencias...', {
-      firstName,
-      lastName,
-      mail,
-      DNI,
-      phoneNumber
-  })
-
-  Swal.close();
+        response.data;
+        Swal.close();
+        onSubmit(response.data.preferenceId);
+      } catch (error) {
+        Swal.close();
+        MySwal.fire({
+          title: "Error",
+          text: "Hubo un problema al enviar los valores.",
+          icon: "error",
+        });
+      }
     },
   });
   return formik;
