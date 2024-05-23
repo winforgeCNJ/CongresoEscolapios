@@ -22,10 +22,7 @@ export default function Inscription() {
   const mail = formik.values.mail
   const phoneNumber = formik.values.phoneNumber
 
-
- 
   return (
-
       <section
         id="inscripcion"
         className="flex min-h-screen w-full flex-col items-start justify-center gap-y-8 bg-primary px-6 lg:px-20 2xl:px-28"
@@ -39,8 +36,8 @@ export default function Inscription() {
               open={!!preferenceId}
               onClose={() => setPreferenceId(undefined)}
               aria-labelledby="modal-modal-title"
-          aria-describedby="modal-modal-description"
-          sx={{ display: "grid", placeItems: "center" }}
+              aria-describedby="modal-modal-description"
+              sx={{ display: "grid", placeItems: "center" }}
             >
               <StyledBox>
                 <Box sx={{ width: { xs: 300, sm: 450, md: 800 } }}>
@@ -51,9 +48,7 @@ export default function Inscription() {
                     phoneNumber={phoneNumber}
                     mail={mail}
                     preferenceId={preferenceId}
-                    onMPSubmit={() => {
-                      setPreferenceId(undefined);
-      }}
+                    onMPSubmit={() => { setPreferenceId(undefined);}}
                   />
                 </Box>
               </StyledBox>
