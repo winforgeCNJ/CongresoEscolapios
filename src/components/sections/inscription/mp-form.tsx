@@ -9,8 +9,8 @@ import { initMercadoPago } from "@mercadopago/sdk-react";
 import { useEffect } from "react";
 import { MySwal } from "@/hooks/useCustomFormik";
 
-const MP_PUBLIC_KEY = process.env.VITE_MP_PUBLIC_KEY;
-const BACKEND_URL = process.env.VITE_BACKEND_URL;
+const MP_PUBLIC_KEY = process.env.NEXT_PUBLIC_MP_PUBLIC_KEY;
+const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 
 initMercadoPago(MP_PUBLIC_KEY!);
 
@@ -102,6 +102,17 @@ const onSubmit = async (
         ...extraData,
       }),
     });
+
+    const data = await response.json()
+
+    if (data.payment.apiResponse.statusCode === 201) {
+      MySwal.fire({
+        title: "Éxito",
+        text: "El pago se concreto correctamente.",
+        icon: "success",
+      });
+    }
+
     onMPSubmit();
     return response.json();
   } catch (error) {

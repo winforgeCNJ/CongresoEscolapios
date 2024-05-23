@@ -5,7 +5,7 @@ import { DTOPreferenceReq } from "./DTO/Preference";
 export const mpApi = createApi({
   reducerPath: "MP_API",
   baseQuery: fetchBaseQuery({
-    baseUrl: process.env.VITE_BACKEND_URL,
+    baseUrl: process.env.NEXT_PUBLIC_BACKEND_URL,
     prepareHeaders: (headers) => {
       headers.set("Content-Type", "application/json");
       return headers;

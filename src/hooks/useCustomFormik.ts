@@ -23,12 +23,8 @@ const useCustomFormik = ({ onSubmit }: Props) => {
         .integer("El valor debe ser entero")
         .min(999999, "Al menos 7 caracteres")
         .required("Campo requerido"),
-      mail : Yup.string().min(6, "Almenos 6 caracteres").max(12, "El maximo de caracteres es de 12").required("Campo requerido").email('Correo no valido'),
-      phoneNumber : Yup.number().typeError("El campo debe ser numerico")
-      .positive("El valor debe ser positivo")
-      .integer("El valor debe ser entero")
-      .min(999999999, "Al menos 10 caracteres")
-      .required("Campo requerido"),
+      mail : Yup.string().min(6, "Almenos 6 caracteres").max(25, "El maximo de caracteres es de 25").required("Campo requerido").email('Correo no valido'),
+      phoneNumber : Yup.string().min(6, "Al menos 6 caracteres").max(25, "El maximo de caracteres es de 25").required("Campo requerido"),
         
     }),
     onSubmit: async ({ firstName, lastName, DNI, mail, phoneNumber }) => {
@@ -41,6 +37,8 @@ const useCustomFormik = ({ onSubmit }: Props) => {
         Swal.close();
         onSubmit(response.data.preferenceId);
       } catch (error) {
+
+        console.log('Create Preference Error', error)
         Swal.close();
         MySwal.fire({
           title: "Error",

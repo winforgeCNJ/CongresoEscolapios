@@ -96,14 +96,13 @@ export default function Form() {
           name="user_name"
           placeholder="NOMBRE"
           error={errors?.user_name}
-          className={`${errors.user_name && "border-red-400 "}`}
         />
         <Input
           onChange={handleChange}
           name="last_name"
           placeholder="APELLIDO"
           error={errors?.last_name}
-          className={`${errors.last_name && "border-red-400 mt-2 lg:mt-0"}`}
+          className={`mt-2 lg:mt-0`}
         />
       </div>
 
@@ -113,7 +112,6 @@ export default function Form() {
           name="email"
           placeholder="MAIL"
           type="email"
-          className={` ${errors.email && "border-red-400"}`}
           error={errors?.email}
         />
       </div>
