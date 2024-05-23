@@ -6,7 +6,6 @@ export const themes = [
     description:
       "La fe y la razón en la articulación de la propuesta educativa.",
     list: [
-      ,
       "Evangelización del curriculum ",
       "La educación humanista y occidente		",
       "La crítica al pedagogismo actual y la generación desheredada",
