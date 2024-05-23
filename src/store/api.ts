@@ -13,11 +13,11 @@ export const mpApi = createApi({
   }),
   endpoints: (builder) => ({
     postPreference: builder.mutation<{ preferenceId: string }, DTOPreferenceReq>({
-      query: ({ DNI, firstName, lastName }) => {
+      query: ({ DNI, firstName, lastName, phoneNumber, mail }) => {
         return {
           url: `/createPreference`,
           method: "POST",
-          body: { DNI, firstName, lastName },
+          body: { DNI, firstName, lastName, phoneNumber, mail },
         };
       },
     }),

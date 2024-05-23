@@ -7,6 +7,7 @@ import {
 } from "@mercadopago/sdk-react/bricks/payment/type";
 import { initMercadoPago } from "@mercadopago/sdk-react";
 import { useEffect } from "react";
+import { MySwal } from "./hooks/useCustomFormik";
 
 const MP_PUBLIC_KEY = import.meta.env.VITE_MP_PUBLIC_KEY;
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
@@ -17,11 +18,13 @@ interface Props {
   firstName: string;
   lastName: string;
   DNI: string;
+  phoneNumber: string;
+  mail: string;
   preferenceId: string;
   onMPSubmit: () => void;
 }
 
-const MPForm = ({ DNI, firstName, lastName, preferenceId, onMPSubmit }: Props) => {
+const MPForm = ({ DNI, firstName, lastName, phoneNumber, mail, preferenceId, onMPSubmit }: Props) => {
   initialization.preferenceId = preferenceId;
 
   useEffect(() => {
@@ -29,7 +32,6 @@ const MPForm = ({ DNI, firstName, lastName, preferenceId, onMPSubmit }: Props) =
       if ("paymentBrickController" in window) {
         type helper = { unmount: () => void };
         (window.paymentBrickController as helper).unmount();
-        console.log("first");
       }
     };
   }, []);
@@ -39,7 +41,15 @@ const MPForm = ({ DNI, firstName, lastName, preferenceId, onMPSubmit }: Props) =
       initialization={initialization}
       customization={customization}
       onSubmit={(paymentFormData, additionalData) =>
-        onSubmit(paymentFormData, additionalData, { firstName, lastName, DNI, onMPSubmit, preferenceId })
+        onSubmit(paymentFormData, additionalData, {
+          firstName,
+          lastName,
+          DNI,
+          phoneNumber,
+          mail,
+          onMPSubmit,
+          preferenceId,
+        })
       }
     />
   );
@@ -53,12 +63,34 @@ const onSubmit = async (
   inscriptioData: Props
 ) => {
   try {
-    const { DNI, firstName, lastName, onMPSubmit } = inscriptioData;
+    const { DNI, firstName, lastName, phoneNumber, mail, onMPSubmit } = inscriptioData;
+    const formDataInfo = formData && {
+      TransactionAmount: formData.transaction_amount,
+      Token: formData.token,
+      // Description : formData.
+      Installments: formData.installments,
+      PaymentMethodId: formData.payment_method_id,
+      Payer: {
+        Id: formData.payer.id,
+        Identification: formData.payer.identification,
+        Email: formData.payer.email,
+        Address: formData.payer.address,
+        FirstName: formData.payer.first_name,
+        LastName: formData.payer.last_name,
+        Type: formData.payer.type,
+      },
+    };
 
-    if (selectedPaymentMethod === "wallet_purchase") {
-      onMPSubmit();
-      return;
-    }
+    const extraData = {
+      paymentMethod: selectedPaymentMethod,
+      cardHolderName: additionalData?.cardholderName,
+      lastFourDigits: additionalData?.lastFourDigits,
+      firstName,
+      lastName,
+      DNI,
+      phoneNumber,
+      mail,
+    };
 
     const response = await fetch(BACKEND_URL + "/payment", {
       method: "POST",
@@ -66,34 +98,18 @@ const onSubmit = async (
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        formData: {
-          TransactionAmount: formData.transaction_amount,
-          Token: formData.token,
-          // Description : formData.
-          Installments: formData.installments,
-          PaymentMethodId: formData.payment_method_id,
-          Payer: {
-            Id: formData.payer.id,
-            Identification: formData.payer.identification,
-            Email: formData.payer.email,
-            Address: formData.payer.address,
-            FirstName: formData.payer.first_name,
-            LastName: formData.payer.last_name,
-            Type: formData.payer.type,
-          },
-        },
-        paymentMethod: selectedPaymentMethod,
-        cardHolderName: additionalData?.cardholderName,
-        lastFourDigits: additionalData?.lastFourDigits,
-        firstName,
-        lastName,
-        DNI,
+        formData: formDataInfo,
+        ...extraData,
       }),
     });
     onMPSubmit();
     return response.json();
   } catch (error) {
-    console.log(error);
+    MySwal.fire({
+      title: "Error",
+      text: "Hubo un problema al enviar los valores.",
+      icon: "error",
+    });
   }
 };
 
@@ -123,5 +139,6 @@ const customization: IPaymentBrickCustomization = {
     creditCard: "all" as const,
     debitCard: "all" as const,
     mercadoPago: ["wallet_purchase"] as const,
+    maxInstallments: 3,
   },
 };

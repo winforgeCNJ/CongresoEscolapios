@@ -9,25 +9,27 @@ interface Props {
   onSubmit: (preferenciId: string) => void;
 }
 
-const MySwal = withReactContent(Swal);
+export const MySwal = withReactContent(Swal);
 const useCustomFormik = ({ onSubmit }: Props) => {
   const [createPreference] = usePostPreferenceMutation();
   const formik = useFormik<DTOPreferenceReq>({
-    initialValues: { firstName: "", lastName: "", DNI: "" },
+    initialValues: { firstName: "", lastName: "", DNI: "", phoneNumber: "", mail: "" },
     validationSchema: Yup.object({
-      firstName: Yup.string().min(2, "Al menos 2 caracteres").max(70, "Too Long!").required("Campo requerido"),
-      lastName: Yup.string().min(2, "Al menos 2 caracteres").max(70, "Too Long!").required("Campo requerido"),
+      firstName: Yup.string().min(2, "Al menos 2 caracteres").max(25, "Demasiado largo").required("Campo requerido"),
+      lastName: Yup.string().min(2, "Al menos 2 caracteres").max(25, "Demasiado largo").required("Campo requerido"),
       DNI: Yup.number()
         .typeError("El campo debe ser numerico")
         .positive("El valor debe ser positivo")
         .integer("El valor debe ser entero")
         .min(999999, "Al menos 7 caracteres")
         .required("Campo requerido"),
+      phoneNumber: Yup.string().min(2, "Al menos 6 caracteres").max(25, "Demasiado largo").required("Campo requerido"),
+      mail: Yup.string().email("Formato de mail inválido").required("Campo requerido"),
     }),
-    onSubmit: async ({ firstName, lastName, DNI }) => {
+    onSubmit: async ({ firstName, lastName, DNI, phoneNumber, mail }) => {
       MySwal.showLoading();
       try {
-        const response = await createPreference(new DTOPreferenceReq(firstName, lastName, DNI));
+        const response = await createPreference(new DTOPreferenceReq(firstName, lastName, DNI, phoneNumber, mail));
         if ("error" in response) throw response.error;
 
         response.data;

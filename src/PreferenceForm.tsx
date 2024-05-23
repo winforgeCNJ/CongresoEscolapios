@@ -18,7 +18,7 @@ const PreferenceForm = ({ formik }: Props) => {
           <input
             id="firstName"
             type="text"
-            placeholder="FirstName"
+            placeholder="Nombre"
             style={{ padding: "1rem 1rem", fontSize: "1.5rem" }}
             {...formik.getFieldProps("firstName")}
           />
@@ -28,7 +28,7 @@ const PreferenceForm = ({ formik }: Props) => {
           <input
             id="lastName"
             type="text"
-            placeholder="LastName"
+            placeholder="Apellido"
             style={{ padding: "1rem 1rem", fontSize: "1.5rem" }}
             {...formik.getFieldProps("lastName")}
           />
@@ -43,6 +43,26 @@ const PreferenceForm = ({ formik }: Props) => {
             {...formik.getFieldProps("DNI")}
           />
           <ErrorMessageStyled name="DNI" component="div" />
+        </div>
+        <div style={{ height: "70px" }}>
+          <input
+            id="phoneNumber"
+            type="cel"
+            placeholder="Número de Celular"
+            style={{ padding: "1rem 1rem", fontSize: "1.5rem" }}
+            {...formik.getFieldProps("phoneNumber")}
+          />
+          <ErrorMessageStyled name="phoneNumber" component="div" />
+        </div>
+        <div style={{ height: "70px" }}>
+          <input
+            id="mail"
+            type="mail"
+            placeholder="Email"
+            style={{ padding: "1rem 1rem", fontSize: "1.5rem" }}
+            {...formik.getFieldProps("mail")}
+          />
+          <ErrorMessageStyled name="mail" component="div" />
         </div>
         <button type="submit">Pagar</button>
       </form>

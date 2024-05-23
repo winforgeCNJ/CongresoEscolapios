@@ -15,6 +15,8 @@ function App() {
   const firstName = formik.values.firstName;
   const lastName = formik.values.lastName;
   const DNI = formik.values.DNI;
+  const phoneNumber = formik.values.phoneNumber;
+  const mail = formik.values.mail;
 
   return (
     <div style={{ display: "grid", placeContent: "center", width: "100vw", minHeight: "100vh" }}>
@@ -33,6 +35,8 @@ function App() {
                 firstName={firstName}
                 lastName={lastName}
                 DNI={DNI}
+                phoneNumber={phoneNumber}
+                mail={mail}
                 preferenceId={preferenceId}
                 onMPSubmit={() => {
                   setPreferenceId(undefined);
