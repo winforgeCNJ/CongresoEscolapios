@@ -11,17 +11,19 @@ export default function Inscription() {
 
   const onPreferenceSubmit = (preferenceId: string) => {
     setPreferenceId(preferenceId);
+
+    console.log(preferenceId)
   };
 
   const formik = useCustomFormik({ onSubmit : onPreferenceSubmit })
   const firstName = formik.values.firstName
   const lastName = formik.values.lastName;
   const DNI = formik.values.DNI;
-  const email = formik.values.email
-  const phone = formik.values.phone
+  const mail = formik.values.mail
+  const phoneNumber = formik.values.phoneNumber
 
 
-
+ 
   return (
 
       <section

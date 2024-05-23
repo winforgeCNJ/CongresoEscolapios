@@ -24,8 +24,8 @@ export default function Form( { formik } : Props ) {
         <Input error={formik.errors.lastName} id="lastName" placeholder="APELLIDO"  {...formik.getFieldProps('lastName')}/>
       </div>
       <div className="flex flex-col lg:flex-row w-full items-center gap-x-4 lg:gap-x-6">
-        <Input error={formik.errors.email} type="email" id="email" placeholder="MAIL" {...formik.getFieldProps('email')} />
-        <Input error={formik.errors.phone} id="phone" placeholder="CEL..:" {...formik.getFieldProps('phone')} type='number'/>
+        <Input error={formik.errors.mail} type="email" id="mail" placeholder="MAIL" {...formik.getFieldProps('mail')} />
+        <Input error={formik.errors.phoneNumber} id="phoneNumber" placeholder="CEL..:" {...formik.getFieldProps('phoneNumber')} type='number'/>
       </div>
       <div className='w-full rounded-[1.2rem] border-2 bg-transparent px-6 py-2 text-lg text-white relative outline-none focus:border-4 flex items-center justify-center focus:border-secondary'>
         <p className='absolute top-1/2 -translate-y-1/2 left-6 text-gray-400'>COSTO:</p>
