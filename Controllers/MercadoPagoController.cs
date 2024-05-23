@@ -11,6 +11,7 @@ using Services;
 using System.Text;
 using System.Reflection;
 using Helpers;
+using AppContext.Models;
 
 namespace Escolapios.Controllers;
 
@@ -58,7 +59,9 @@ public class MercadoPagoController : ControllerBase
         Metadata = new Dictionary<string, object>() {
           { "FirstName", preferenceReq.firstName },
           { "LastName", preferenceReq.lastName },
-          { "DNI", preferenceReq.DNI }
+          { "DNI", preferenceReq.DNI },
+          { "phoneNumber", preferenceReq.phoneNumber },
+          { "mail", preferenceReq.mail }
         }
       };
 
@@ -83,28 +86,55 @@ public class MercadoPagoController : ControllerBase
   {
     try
     {
+
       var formData = request.formData;
       var paymentMethod = request.paymentMethod;
       var cardholderName = request.cardholderName;
       var lastFourDigits = request.lastFourDigits;
 
-      MercadoPagoConfig.AccessToken = _appSettings.MPAccessToken;
-      formData.TransactionAmount = _appSettings.RegistrationFee;
-      formData.NotificationUrl = _appSettings.NotificationUrl;
-
-      formData.Metadata = new Dictionary<string, object>() {
+      var Metadata = new Dictionary<string, object>() {
           { "paymentMethod", paymentMethod },
           { "cardholderName", cardholderName },
           { "lastFourDigits", lastFourDigits },
           { "FirstName", request.firstName },
           { "LastName", request.lastName },
-          { "DNI", request.DNI }
+          { "DNI", request.DNI },
+          { "phoneNumber", request.phoneNumber },
+          { "mail", request.mail }
         };
 
+
+      var newprePayment = new PrePayment
+      {
+        FirstName = request.firstName,
+        LastName = request.lastName,
+        IdentificationNumber = request.DNI,
+        PhoneNumber = request.phoneNumber,
+        Mail = request.mail,
+        PaymentMethodId = request.formData?.PaymentMethodId ?? "wallet_purchase",
+        PaymentMethod = request.paymentMethod
+      };
+      _context.PrePayment.Add(newprePayment);
+      _context.SaveChanges();
+
+      if (request.formData?.PaymentMethodId == "wallet_purchase")
+        return Ok();
+      if (request.formData == null) return Ok();
+      if (formData == null) return Ok();
+
+
+      MercadoPagoConfig.AccessToken = _appSettings.MPAccessToken;
+      formData.TransactionAmount = _appSettings.RegistrationFee;
+      formData.NotificationUrl = _appSettings.NotificationUrl;
+
+      formData.Metadata = Metadata;
       formData.Payer.FirstName = cardholderName;
 
       var client = new PaymentClient();
       Payment payment = await client.CreateAsync(formData);
+
+      if (payment.Status != PaymentStatus.Approved) return BadRequest($"Invalid Card Info: Status {payment.Status}");
+
       return Ok(new { payment, client });
     }
     catch (Exception ex)
@@ -119,43 +149,26 @@ public class MercadoPagoController : ControllerBase
   {
     try
     {
-      // var isValidSignature = _mpService.VerifySignature(Request);
-
-      // if (!isValidSignature) return BadRequest("HMAC verification failed");
-
 
       MercadoPagoConfig.AccessToken = _appSettings.MPAccessToken;
       var PaymentClient = new PaymentClient();
       Payment paymentFromMP = await PaymentClient.GetAsync(WebhookReq.Data.Id);
       if (paymentFromMP == null) return BadRequest("Invalid 'WebhookReq.Data.Id)'");
 
-      var paymentData = new AppContext.Models.Payment
+      var paymentData = new AppContext.Models.PaymentTable
       {
         PaymentId = paymentFromMP.Id ?? 0,
         FirstName = _mpService.GetDictionaryData("first_name", paymentFromMP.Metadata) ?? "",
         LastName = _mpService.GetDictionaryData("last_name", paymentFromMP.Metadata) ?? "",
         IdentificationNumber = _mpService.GetLongData("dni", paymentFromMP.Metadata),
+        PhoneNumber = _mpService.GetDictionaryData("phone_number", paymentFromMP.Metadata) ?? "",
+        Mail = _mpService.GetDictionaryData("mail", paymentFromMP.Metadata) ?? "",
         paymentStatus = paymentFromMP.Status,
+        NotificationId = WebhookReq.Id,
       };
 
-      _context.PaymentTable.Add(paymentData);
+      _context.Payment.Add(paymentData);
       _context.SaveChanges();
-
-      if (paymentFromMP.Status == PaymentStatus.Approved || paymentFromMP.Status == PaymentStatus.Rejected)
-      {
-
-        var Subject = "Informacion Congreso de Educación Humanista";
-        var Body = $@"
-            <html>
-            <body>
-                <h4>Hola {paymentFromMP.Card.Cardholder?.Name ?? ""}</h4>
-                < p > Estamos encantados de que hayas decidido sumarte al <i>'Congreso de Educación Humanista'</i>.</p>
-                <p>Tu pago está en estado: <b>{paymentFromMP.Status}</b></p>
-            </body>
-            </html>";
-
-        _mailService.SendEmail(paymentFromMP.Payer.Email, Subject, Body);
-      }
 
       return Ok();
     }
@@ -174,7 +187,7 @@ public class MercadoPagoController : ControllerBase
       MercadoPagoConfig.AccessToken = _appSettings.MPAccessToken;
 
 
-      var paymentGroups = (from payInfo in _context.PaymentTable
+      var paymentGroups = (from payInfo in _context.Payment
                            where payInfo.IdentificationNumber == dni
                            group payInfo by payInfo.PaymentId into grouped
                            select new PaymentGroupInfo
@@ -215,10 +228,10 @@ public class MercadoPagoController : ControllerBase
     try
     {
       // Obtiene los datos de la base de datos
-      var usersInfo = (from payInfo in _context.PaymentTable
+      var usersInfo = (from payInfo in _context.Payment
                        where payInfo.paymentStatus == PaymentStatus.Approved
-                       select payInfo).ToList();
-
+                       group payInfo by payInfo.NotificationId into grouped
+                       select grouped.First()).ToList();
       // Verifica si hay datos
       if (usersInfo == null || usersInfo.Count == 0)
       {

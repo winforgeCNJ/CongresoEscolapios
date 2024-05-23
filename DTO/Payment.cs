@@ -8,20 +8,21 @@ namespace DTO;
 
 public class DTOPaymentReq
 {
-  [Required]
-  public PaymentCreateRequest formData { get; set; }
+  public PaymentCreateRequest? formData { get; set; }
   [Required]
   public string paymentMethod { get; set; }
-  [Required]
-  public string cardholderName { get; set; }
-  [Required]
-  public string lastFourDigits { get; set; }
+  public string? cardholderName { get; set; }
+  public string? lastFourDigits { get; set; }
   [Required]
   public string firstName { get; set; }
   [Required]
   public string lastName { get; set; }
   [Required]
   public string DNI { get; set; }
+  [Required]
+  public string phoneNumber { get; set; }
+  [Required]
+  public string mail { get; set; }
 
 }
 

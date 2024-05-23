@@ -14,6 +14,10 @@ public class DTOPreferenceReq
   public string lastName { get; set; }
   [Required]
   public string DNI { get; set; }
+  [Required]
+  public string phoneNumber { get; set; }
+  [Required]
+  public string mail { get; set; }
 
 }
 
