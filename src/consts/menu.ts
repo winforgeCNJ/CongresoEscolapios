@@ -11,7 +11,7 @@ export const menu = [
   },
   {
     id: 3,
-    title: "Tematicas",
+    title: "Temáticas",
     to: "#tematicas",
   },
   {
