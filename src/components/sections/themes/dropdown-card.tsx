@@ -1,3 +1,4 @@
+import useClickOutisde from "@/hooks/useClickOutisde";
 import { Alegreya } from "next/font/google";
 import React, { useEffect, useRef } from "react";
 
@@ -21,28 +22,7 @@ export default function DropdownCard({
 }: DropdownCardProps) {
 
   const dropdownRef = useRef<HTMLDivElement>(null)
-
-  const handleClickOutsideModal = (event: any) => {
-    if (
-      isOpen &&
-      !dropdownRef?.current?.contains(event.target) 
-    ) {
-      onClose();
-    }
-  };
-
-  useEffect(() => {
-    if (isOpen) {
-      document.addEventListener('mousedown', handleClickOutsideModal);
-    } else {
-      document.removeEventListener('mousedown', handleClickOutsideModal);
-    }
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutsideModal);
-    };
-  }, [isOpen]);
-
+  useClickOutisde({ ref : dropdownRef, isOpen, onClose })
   return (
     <section
       ref={dropdownRef}

@@ -23,7 +23,7 @@ export default function ObjectiveCard({
         objectiveActive === card.id ? "opacity-100 " : "-z-10 opacity-0",
       )}
     >
-      <img src={card.icon} width={150} height={150} className="" />
+      <img src={card.icon} width={150} height={150} className="h-36" />
       <p className="w-full text-center  lg:w-[18rem] text-lg  ">
         {card.description}
       </p>

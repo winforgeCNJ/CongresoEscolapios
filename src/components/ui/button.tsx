@@ -1,3 +1,5 @@
+"use client"
+
 import { cn } from "@/lib/cn";
 import Link from "next/link";
 import React from "react";
@@ -8,6 +10,7 @@ interface ButtonProps {
   children: React.ReactNode;
   to?: string;
   disabled?: boolean;
+  type? : 'button' | 'submit' | 'reset'
 }
 
 export default function Button({
@@ -16,6 +19,7 @@ export default function Button({
   to,
   disabled,
   onClick,
+  type
 }: ButtonProps) {
   const classDefault =
     "text-primary to-secondary shadow-secondary/15 inline-block rounded-full bg-gradient-to-r from-white via-white px-8 py-2 text-sm tracking-wide shadow-lg transition-all hover:scale-[1.04] hover:tracking-widest";
@@ -24,9 +28,13 @@ export default function Button({
     return (
       <button
         disabled={disabled}
+        type={type ? type : 'button'}
         onClick={(e) => {
-          e.stopPropagation();
-          onClick && onClick();
+          if (onClick) {
+            e.stopPropagation();
+            onClick();
+          }
+          
         }}
         className={cn(classDefault, className)}
       >

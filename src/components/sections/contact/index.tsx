@@ -5,6 +5,7 @@ export default function Contact() {
   return (
     <section
       id="contactanos"
+
       className="relative flex min-h-screen w-full items-center justify-center px-4 py-4 lg:px-0 lg:py-16 2xl:py-0"
     >
       <Form />

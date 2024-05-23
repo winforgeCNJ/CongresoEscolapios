@@ -76,7 +76,7 @@ export default function Form() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="relative mb-28 w-full max-w-full rounded-[3rem] bg-white/20 px-6 py-6 text-white lg:max-w-4xl lg:px-12 "
+      className="relative  w-full max-w-full rounded-[3rem] bg-white/20 px-6 py-6 text-white lg:max-w-4xl lg:px-12 "
     >
 
       { status === 'error' && 
