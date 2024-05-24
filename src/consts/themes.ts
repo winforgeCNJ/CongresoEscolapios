@@ -4,7 +4,7 @@ export const themes = [
     isOpen: false,
     image: "/assets/themes/theme-1.webp",
     description:
-      "La fe y la razón en la articulación de la propuesta educativa.",
+      "La fe y la razón en la articulación de la propuesta educativa",
     list: [
       "Evangelización del curriculum ",
       "La educación humanista y occidente		",
@@ -24,7 +24,7 @@ export const themes = [
     isOpen: false,
     image: "/assets/themes/theme-2.webp",
     description:
-      "La fe y la vida en la dinámica formativa de docentes y alumnos.",
+      "La fe y la vida en la dinámica formativa de docentes y alumnos",
     list: [
       "Forja del Carácter.",
       "La formación catequística y el proceso pastoral.",
@@ -42,7 +42,7 @@ export const themes = [
     isOpen: false,
     image: "/assets/themes/theme-3.webp",
     description:
-      "La tradición católica,tomista y calasancia como pedagogía perenne.",
+      "La tradición católica,tomista y calasancia como pedagogía perenne",
     list: [
       "La educación integral desde Santo Tomás de Aquino.",
       "Piedad y Letras como síntesis del planteo curricular.",
