@@ -24,7 +24,15 @@ interface Props {
   onMPSubmit: () => void;
 }
 
-const MPForm = ({ DNI, firstName, lastName, phoneNumber, mail, preferenceId, onMPSubmit }: Props) => {
+const MPForm = ({
+  DNI,
+  firstName,
+  lastName,
+  phoneNumber,
+  mail,
+  preferenceId,
+  onMPSubmit,
+}: Props) => {
   initialization.preferenceId = preferenceId;
 
   useEffect(() => {
@@ -60,10 +68,11 @@ export default MPForm;
 const onSubmit = async (
   { formData, selectedPaymentMethod }: IPaymentFormData,
   additionalData: IAdditionalCardFormData | null | undefined,
-  inscriptioData: Props
+  inscriptioData: Props,
 ) => {
   try {
-    const { DNI, firstName, lastName, phoneNumber, mail, onMPSubmit } = inscriptioData;
+    const { DNI, firstName, lastName, phoneNumber, mail, onMPSubmit } =
+      inscriptioData;
     const formDataInfo = formData && {
       TransactionAmount: formData.transaction_amount,
       Token: formData.token,
@@ -103,7 +112,7 @@ const onSubmit = async (
       }),
     });
 
-    const data = await response.json()
+    const data = await response.json();
 
     if (data.payment.apiResponse.statusCode === 201) {
       MySwal.fire({

@@ -16,7 +16,7 @@ export default function Hero() {
       <h1
         className={`${alegreya.className} w-96 text-center text-4xl text-white lg:w-[36rem] lg:text-6xl   lg:leading-[3.6rem]`}
       >
-        Innovar hoy desde el espíritu clásico.
+        Innovar hoy desde el espíritu clásico
       </h1>
 
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2">

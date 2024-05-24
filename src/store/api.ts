@@ -12,7 +12,10 @@ export const mpApi = createApi({
     },
   }),
   endpoints: (builder) => ({
-    postPreference: builder.mutation<{ preferenceId: string }, DTOPreferenceReq>({
+    postPreference: builder.mutation<
+      { preferenceId: string },
+      DTOPreferenceReq
+    >({
       query: ({ DNI, firstName, lastName, phoneNumber, mail }) => {
         return {
           url: `/createPreference`,
