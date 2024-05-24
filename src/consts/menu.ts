@@ -19,11 +19,11 @@ export const menu = [
     title: "Cronograma",
     to: "#cronograma",
   },
-  // {
-  //   id: 5,
-  //   title: "Inscripción",
-  //   to: "#inscripcion",
-  // },
+  {
+    id: 5,
+    title: "Inscripción",
+    to: "#inscripcion",
+  },
   {
     id: 6,
     title: "Contactanos",

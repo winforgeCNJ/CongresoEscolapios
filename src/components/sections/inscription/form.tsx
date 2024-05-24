@@ -54,7 +54,7 @@ export default function Form({ formik }: Props) {
             error={formik.errors.phoneNumber}
             id="phoneNumber"
             className="mt-2 lg:mt-0"
-            placeholder="CEL..:"
+            placeholder="CEL.."
             {...formik.getFieldProps("phoneNumber")}
             type="text"
           />
