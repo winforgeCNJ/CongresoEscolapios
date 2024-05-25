@@ -39,30 +39,29 @@ export default function Form() {
   const [status, setStatus] = useState<"iddle" | "success" | "error">("iddle");
 
   const onSubmit = async (values: InitialValuesT) => {
+    debugger;
     setLoad(true);
     try {
       const res = await sendEmail(values);
-      if (res.text !== 'OK') {
-        setStatus('error')
+      if (res.text !== "OK") {
+        setStatus("error");
 
         setTimeout(() => {
-          setStatus('iddle')
-        }, 8000)
-        return
+          setStatus("iddle");
+        }, 8000);
+        return;
       }
-      
-      setStatus('success')
-     
+
+      setStatus("success");
     } catch (error) {
       console.log(error);
-      setStatus('error')
+      setStatus("error");
       setTimeout(() => {
-        setStatus('iddle')
-      }, 8000)
+        setStatus("iddle");
+      }, 8000);
     } finally {
       setLoad(false);
     }
-
   };
 
   const { handleChange, errors, handleSubmit } = useFormik({
@@ -70,7 +69,7 @@ export default function Form() {
     onSubmit,
     validationSchema,
   });
-
+  debugger;
   if (status === "success") return <SuccessForm />;
 
   return (
@@ -78,19 +77,19 @@ export default function Form() {
       onSubmit={handleSubmit}
       className="relative  w-full max-w-full rounded-[3rem] bg-white/20 px-6 py-6 text-white lg:max-w-4xl lg:px-12 "
     >
-
-      { status === 'error' && 
-        <div className="absolute top-4 right-12 bg-red-300/40 border border-red-400 text-white px-2 rounded-md py-1">
-          <p className="text-sm flex items-center gap-x-1">
+      {status === "error" && (
+        <div className="absolute right-12 top-4 rounded-md border border-red-400 bg-red-300/40 px-2 py-1 text-white">
+          <p className="flex items-center gap-x-1 text-sm">
             <IconError />
-            Ocurrio un error al enviar el mail, intentelo mas tarde.</p>
+            Ocurrio un error al enviar el mail, intentelo mas tarde.
+          </p>
         </div>
-      }
+      )}
       <h2 className="text-2xl font-light">Contactanos</h2>
       <p className="mb-4 text-base font-medium  ">
         Para saber más acerca de promociones especiales, comida o alojamiento.
       </p>
-      <div className="mb-2 flex-col lg:flex-row flex w-full items-center justify-between gap-x-2 lg:gap-x-12">
+      <div className="mb-2 flex w-full flex-col items-center justify-between gap-x-2 lg:flex-row lg:gap-x-12">
         <Input
           onChange={handleChange}
           name="user_name"
@@ -103,7 +102,7 @@ export default function Form() {
           name="last_name"
           placeholder="APELLIDO"
           error={errors?.last_name}
-          className={`${errors.last_name && "border-red-400 mt-2 lg:mt-0"}`}
+          className={`${errors.last_name && "mt-2 border-red-400 lg:mt-0"}`}
         />
       </div>
 
@@ -140,7 +139,8 @@ export default function Form() {
         </label>
         <Button
           disabled={load}
-          className="lg:mb-10 rounded-[1.2rem] px-6 py-3 font-medium hover:tracking-normal"
+          className="rounded-[1.2rem] px-6 py-3 font-medium hover:tracking-normal lg:mb-10"
+          type="submit"
         >
           {load ? (
             <IconLoad className="block w-[3.256rem] animate-spin" />
