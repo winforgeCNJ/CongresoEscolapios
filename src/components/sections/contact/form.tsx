@@ -39,7 +39,6 @@ export default function Form() {
   const [status, setStatus] = useState<"iddle" | "success" | "error">("iddle");
 
   const onSubmit = async (values: InitialValuesT) => {
-    debugger;
     setLoad(true);
     try {
       const res = await sendEmail(values);
@@ -69,7 +68,7 @@ export default function Form() {
     onSubmit,
     validationSchema,
   });
-  debugger;
+
   if (status === "success") return <SuccessForm />;
 
   return (
