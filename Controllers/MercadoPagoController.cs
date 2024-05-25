@@ -135,10 +135,10 @@ public class MercadoPagoController : ControllerBase
       var client = new PaymentClient();
       Payment payment = await client.CreateAsync(formData);
 
-      if (payment.Status == PaymentStatus.Rejected) return BadRequest($"Información de tarjeta inválida: Estado {payment.Status}");
-      if (payment.Status == PaymentStatus.Refunded) return BadRequest($"Información de tarjeta inválida: Estado {payment.Status}");
-      if (payment.Status == PaymentStatus.Cancelled) return BadRequest($"Información de tarjeta inválida: Estado {payment.Status}");
-      if (payment.Status == PaymentStatus.InMediation) return BadRequest($"Información de tarjeta inválida: Estado {payment.Status}");
+      if (payment.Status == PaymentStatus.Rejected) return BadRequest(new { message = $"Información de tarjeta inválida: Estado {payment.Status}" });
+      if (payment.Status == PaymentStatus.Refunded) return BadRequest(new { message = $"Información de tarjeta inválida: Estado {payment.Status}" });
+      if (payment.Status == PaymentStatus.Cancelled) return BadRequest(new { message = $"Información de tarjeta inválida: Estado {payment.Status}" });
+      if (payment.Status == PaymentStatus.InMediation) return BadRequest(new { message = $"Información de tarjeta inválida: Estado {payment.Status}" });
 
 
       return Ok(new { payment, client, message = $"Estado del pago: {payment.Status}" });
