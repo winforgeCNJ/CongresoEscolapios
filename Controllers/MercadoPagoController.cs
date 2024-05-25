@@ -33,6 +33,7 @@ public class MercadoPagoController : ControllerBase
     _mpService = mpService;
   }
 
+
   [HttpPost("createPreference")]
   public IActionResult CreatePreferences(DTOPreferenceReq preferenceReq)
   {
@@ -81,6 +82,7 @@ public class MercadoPagoController : ControllerBase
 
   }
 
+
   [HttpPost("payment")]
   public async Task<IActionResult> Payment(DTOPaymentReq request)
   {
@@ -118,9 +120,9 @@ public class MercadoPagoController : ControllerBase
       _context.SaveChanges();
 
       if (request.formData?.PaymentMethodId == "wallet_purchase")
-        return Ok();
-      if (request.formData == null) return Ok();
-      if (formData == null) return Ok();
+        return Ok(new { message = $"Fuiste redirigido a Mercado Pago" });
+      if (request.formData == null) return Ok(new { message = $"Fuiste redirigido a Mercado Pago" });
+      if (formData == null) return Ok(new { message = $"Fuiste redirigido a Mercado Pago" });
 
 
       MercadoPagoConfig.AccessToken = _appSettings.MPAccessToken;
@@ -133,13 +135,17 @@ public class MercadoPagoController : ControllerBase
       var client = new PaymentClient();
       Payment payment = await client.CreateAsync(formData);
 
-      if (payment.Status != PaymentStatus.Approved) return BadRequest($"Invalid Card Info: Status {payment.Status}");
+      if (payment.Status == PaymentStatus.Rejected) return BadRequest($"Información de tarjeta inválida: Estado {payment.Status}");
+      if (payment.Status == PaymentStatus.Refunded) return BadRequest($"Información de tarjeta inválida: Estado {payment.Status}");
+      if (payment.Status == PaymentStatus.Cancelled) return BadRequest($"Información de tarjeta inválida: Estado {payment.Status}");
+      if (payment.Status == PaymentStatus.InMediation) return BadRequest($"Información de tarjeta inválida: Estado {payment.Status}");
 
-      return Ok(new { payment, client });
+
+      return Ok(new { payment, client, message = $"Estado del pago: {payment.Status}" });
     }
     catch (Exception ex)
     {
-      return StatusCode(500, ex.Message);
+      return StatusCode(500, new { message = ex.Message });
     }
 
   }
@@ -153,7 +159,7 @@ public class MercadoPagoController : ControllerBase
       MercadoPagoConfig.AccessToken = _appSettings.MPAccessToken;
       var PaymentClient = new PaymentClient();
       Payment paymentFromMP = await PaymentClient.GetAsync(WebhookReq.Data.Id);
-      if (paymentFromMP == null) return BadRequest("Invalid 'WebhookReq.Data.Id)'");
+      if (paymentFromMP == null) return BadRequest(new { message = "Invalid 'WebhookReq.Data.Id)'" });
 
       var paymentData = new AppContext.Models.PaymentTable
       {
@@ -174,7 +180,7 @@ public class MercadoPagoController : ControllerBase
     }
     catch (Exception ex)
     {
-      return StatusCode(500, ex.Message);
+      return StatusCode(500, new { message = ex.Message });
     }
 
   }
