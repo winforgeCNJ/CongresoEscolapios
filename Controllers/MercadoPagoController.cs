@@ -128,9 +128,29 @@ public class MercadoPagoController : ControllerBase
       MercadoPagoConfig.AccessToken = _appSettings.MPAccessToken;
       formData.TransactionAmount = _appSettings.RegistrationFee;
       formData.NotificationUrl = _appSettings.NotificationUrl;
+      formData.ExternalReference = newprePayment.Id.ToString();
+      formData.StatementDescriptor = "Inscripción al congreso humanista";
+
+
+
 
       formData.Metadata = Metadata;
       formData.Payer.FirstName = cardholderName;
+
+      formData.AdditionalInfo.Items = new List<PaymentItemRequest>
+      {
+        new()
+        {
+          Title = "Inscripción",
+          Description = "Inscripción al congreso humanista",
+          Quantity = 1,
+          UnitPrice = _appSettings.RegistrationFee,
+          CategoryId = "congreso",
+          Id = "1"
+        }
+      };
+
+
 
       var client = new PaymentClient();
       Payment payment = await client.CreateAsync(formData);
@@ -145,7 +165,10 @@ public class MercadoPagoController : ControllerBase
     }
     catch (Exception ex)
     {
-      return StatusCode(500, new { message = ex.Message });
+      return StatusCode(500, new
+      {
+        message = ex.Message
+      });
     }
 
   }
