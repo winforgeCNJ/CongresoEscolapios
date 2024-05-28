@@ -136,21 +136,21 @@ public class MercadoPagoController : ControllerBase
 
       formData.Metadata = Metadata;
       formData.Payer.FirstName = cardholderName;
+      formData.AdditionalInfo ??= new PaymentAdditionalInfoRequest();
 
+      // Asigna la lista a formData.AdditionalInfo.Items
       formData.AdditionalInfo.Items = new List<PaymentItemRequest>
-      {
-        new()
-        {
-          Title = "Inscripción",
-          Description = "Inscripción al congreso humanista",
-          Quantity = 1,
-          UnitPrice = _appSettings.RegistrationFee,
-          CategoryId = "congreso",
-          Id = "1"
-        }
-      };
-
-
+          {
+              new()
+              {
+                  Title = "Inscripción",
+                  Description = "Inscripción al congreso humanista",
+                  Quantity = 1,
+                  UnitPrice = _appSettings.RegistrationFee,
+                  CategoryId = "congreso",
+                  Id = "1"
+              }
+          };
 
       var client = new PaymentClient();
       Payment payment = await client.CreateAsync(formData);
