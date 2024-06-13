@@ -19,8 +19,19 @@ export default function Hero() {
         Innovar hoy desde el espíritu clásico
       </h1>
 
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2">
-        <Button to="#objetivos">Saber más</Button>
+      <div className="w-100 absolute bottom-8 left-1/2 flex -translate-x-1/2 flex-col gap-6">
+        <Button
+          to="/inscripcion"
+          className="hover:scale-[1.15] hover:tracking-normal"
+        >
+          Inscripción
+        </Button>
+        <Button
+          to="/#objetivos"
+          className="hover:scale-[1.15] hover:tracking-normal"
+        >
+          Saber más
+        </Button>
       </div>
 
       <div className="-top4 absolute left-0 top-0 -z-10 h-screen w-full">
