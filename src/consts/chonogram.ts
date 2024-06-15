@@ -105,7 +105,7 @@ export const chonogram: ChonogramI[] = [
               title: "HUMANISMO Y ARTE",
               description: [
                 "Leonardo Caviglia - El misterio del hombre en la obra de C.S. Lewis (Ponencia)",
-                "Jeremías Carrió, Betsabé Gómez y Néstor Luján - Castellani-Marechal-Hugo Wast: conversatorio",
+                "Jeremías Carrió, Betsabé Gómez y Néstor Luján - Castellani | Marechal | Hugo Wast: conversatorio",
               ],
             },
             {
