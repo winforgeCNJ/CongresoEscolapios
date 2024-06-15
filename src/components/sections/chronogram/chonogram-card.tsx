@@ -4,6 +4,8 @@ import { optionsChonogram } from ".";
 import { cn } from "@/lib/cn";
 import React from "react";
 
+import SearchModal from "./SearchModal";
+
 interface ChonogramCardProps {
   card: ChonogramI;
   onOpen: () => void;
@@ -122,9 +124,7 @@ export default function ChonogramCard({
             </h4>
             <ul>
               {card.afternoonDescription?.coursesHours.map((el, index) => (
-                <li className={"text-base"} key={index}>
-                  {el}
-                </li>
+                <SearchModal el={el} key={index} />
               ))}
             </ul>
           </div>
