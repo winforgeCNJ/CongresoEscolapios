@@ -25,6 +25,11 @@ export const menu = [
   //   to: "/#inscripcion",
   // },
   {
+    id: 5,
+    title: "Adherentes",
+    to: "/#adherents",
+  },
+  {
     id: 6,
     title: "Contactanos",
     to: "/#contactanos",
