@@ -48,7 +48,9 @@ export default function Adherents() {
           >
             {adherents.map((el, index) => (
               <SwiperSlide key={el.id}>
-                <div className="flex  h-[50px] flex-col gap-4">
+                <div
+                  className={`flex flex-col gap-4 ${el.url === "" && "h-[68.5%] justify-end md:h-[80%]"}`}
+                >
                   <img src={el.url} />
                   <div className="h-[50px] text-center font-semibold text-white lg:text-base">
                     {el.text}

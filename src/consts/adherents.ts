@@ -1,8 +1,8 @@
 export const adherents = [
   {
     id: 1,
-    url: "/assets/adherents/editorial-PP-escolapios.png",
-    text: "Editorial PP. Escolapios",
+    url: "/assets/adherents/universidad-nacional-de-cordoba.png",
+    text: "Universidad Nacional de Córdoba",
   },
   {
     id: 2,
@@ -51,12 +51,12 @@ export const adherents = [
   },
   {
     id: 11,
-    url: "/assets/adherents/universidad-nacional-de-cordoba.png",
-    text: "Universidad Nacional de Córdoba",
+    url: "/assets/adherents/editorial-PP-escolapios.png",
+    text: "Editorial PP. Escolapios",
   },
   {
     id: 12,
-    url: "/assets/adherents/universidad-Cristobal-colon.png",
+    url: "",
     text: "Fundación Ramón Cabezas",
   },
 ];
