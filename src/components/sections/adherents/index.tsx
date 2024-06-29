@@ -14,16 +14,15 @@ import { adherents } from "@/consts/adherents";
 export default function Adherents() {
   return (
     <section
-      id="adherents"
+      id="nos-acompañan"
       className="flex h-auto flex-col bg-primary lg:h-screen lg:flex-row"
     >
       {/* <Title title="Adherentes" className="flex h-[5rem] items-center pl-12" /> */}
 
       <section className="flex w-full flex-1 flex-col items-center">
-        <Title
-          title="Nos Acompañan"
-          className="flex h-[5rem] w-full items-center justify-start pl-12"
-        />
+        <div className="flex h-[5rem] w-full items-center justify-start pl-12">
+          <Title title="Ya nos" active="Acompañan" />
+        </div>
         <section className="grid w-[90%] flex-grow place-items-center">
           <Swiper
             navigation={true}

@@ -2,7 +2,14 @@ import SearchIcon from "@mui/icons-material/Search";
 import { ModalTalleres } from "@/consts/chonogram";
 import React, { useState } from "react";
 import Modal from "@mui/material/Modal";
-import { Card, CardContent, CardHeader, Divider } from "@mui/material";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  Divider,
+  IconButton,
+} from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
 
 interface Props {
   el: string | ModalTalleres;
@@ -35,7 +42,17 @@ const SearchModal = ({ el }: Props) => {
           >
             <Card className="max-h-[80vh] w-[95%] overflow-scroll text-primary">
               <CardHeader
-                title={el?.title.toUpperCase()}
+                title={
+                  <div className="flex w-full items-center justify-between">
+                    <div>{el?.title.toUpperCase()}</div>
+                    <IconButton
+                      aria-label="close"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      <CloseIcon />
+                    </IconButton>
+                  </div>
+                }
                 className="font-bold"
               />
               <Divider />

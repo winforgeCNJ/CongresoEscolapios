@@ -26,8 +26,8 @@ export const menu = [
   // },
   {
     id: 5,
-    title: "Adherentes",
-    to: "/#adherents",
+    title: "Nos Acompañan",
+    to: "/#nos-acompañan",
   },
   {
     id: 6,
