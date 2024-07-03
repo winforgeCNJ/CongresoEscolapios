@@ -52,11 +52,11 @@ export const adherents = [
   {
     id: 11,
     url: "/assets/adherents/editorial-PP-escolapios.png",
-    text: "Editorial PP. Escolapios",
+    text: "Editorial Escolapios",
   },
-  {
-    id: 12,
-    url: "",
-    text: "Fundación Ramón Cabezas",
-  },
+  // {
+  //   id: 12,
+  //   url: "",
+  //   text: "Fundación Ramón Cabezas",
+  // },
 ];
