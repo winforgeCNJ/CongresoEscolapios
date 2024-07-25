@@ -1,0 +1,22 @@
+.button-adherents-next, .button-adherents-prev {
+    background-color: white;
+    border-radius: 99999px;
+    padding: 0.4rem;
+z-index: 1;
+    border: 3px #aaa587 solid;
+}
+
+.button-adherents-next:hover, .button-adherents-prev:hover {
+    @apply bg-gray-300
+    
+}
+
+.swiper-pagination {
+    bottom: var(--swiper-pagination-bottom, -4px) !important;
+  }
+
+
+  
+.swiper-pagination-bullet-active {
+    background-color: white !important;
+  }
