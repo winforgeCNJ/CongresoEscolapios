@@ -3,7 +3,7 @@ import "./../globals.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.congresohumanista.com"),
-  title: "Congreso de Educación Humanista - Escuelas Pías",
+  title: "Inscripción Congreso Humanista - Escuelas Pías",
   description:
     "Participa en nuestro congreso y reflexiona sobre la auténtica educación con raíces en la tradición occidental y cristiana. Descubre materiales y estrecha lazos con otros grupos educativos.",
   alternates: {

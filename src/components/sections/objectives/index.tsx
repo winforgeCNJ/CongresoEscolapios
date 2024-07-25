@@ -8,13 +8,13 @@ export default function Objectives() {
       id="objetivos"
       className="relative flex min-h-screen w-full flex-col items-center lg:flex-row"
     >
-      <div className="absolute left-12 top-12 z-20 2xl:left-28">
+      <div className="absolute left-6 lg:left-12 top-12 z-20 2xl:left-28">
         <Title title="Objetivos del" active="congreso" />
       </div>
-      <div className="hidden h-auto  w-[65vw] lg:block lg:h-screen">
+      <div className="hidden h-auto  w-[65vw] lg:block lg:h-screen bg-primary">
         <img
           src="/assets/objectives/objectives-image.webp"
-          className="h-full w-full object-cover object-center"
+          className="h-full w-full object-cover object-center rounded-tr-2xl "
         />
       </div>
       <ObjectivesCarousel />

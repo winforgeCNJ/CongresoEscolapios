@@ -154,6 +154,7 @@ export const chonogram: ChonogramI[] = [
               title: "PASTORAL Y TEOLOGÍA",
               description: [
                 "Denise Tagliaferro y Susana Pérez - La atención pastoral y formación de las familias que se acercan a la propuesta escolar",
+                "María Isabel y Gutierrez Teran - Faustino Miguez, una propuesta de felicidad"
               ],
             },
             {
@@ -166,7 +167,7 @@ export const chonogram: ChonogramI[] = [
             {
               title: "HUMANISMO Y ARTE",
               description: [
-                "Benjamín D´Amario - El humanismo de Saint Exupery en El principito",
+                "Benjamín D´Amario y Ricardo Raspanti - El humanismo, El principito y Pinocho",
                 "Alejandro Frigolé - La formación humana a través de la literatura en la obra J.R.R. Tolkien. ",
               ],
             },
@@ -184,11 +185,11 @@ export const chonogram: ChonogramI[] = [
           title: "17:00 Talleres",
           content: [
             {
-              title: "PASTORAL Y TEOLOGÍA",
+              title: "PASTORAL Y TEOLOGÍA ",
               description: [
-                "P. Andrés Rodríguez Sch.P. - La formación catequística y el proceso pastoral",
+                "P. Andrés Rodríguez Sch.P. y Patricia Pérez - La formación catequística y el proceso pastoral",
                 "P. Federico Bizzari Sch.P. - El proceso de la pastoral infantil y juvenil integrado en el planteo curricular de la escuela católica",
-                "Orador - Conversatorio sobre la relación entre familia y escuela",
+                "Carlos Galmarini, Cecilia Scarafia y Patricio Videla - Conversatorio sobre la relación entre familia y escuela",
               ],
             },
             {

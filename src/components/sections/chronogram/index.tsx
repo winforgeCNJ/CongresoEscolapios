@@ -22,7 +22,7 @@ export default function Chronogram() {
       <section className="flex-1">
         <Title
           title="Cronograma"
-          className="flex h-[5rem] items-center pl-12"
+          className="flex h-[5rem] items-center pl-6 lg:pl-12 2xl:pl-28"
         />
         <div className="relative flex h-[100dvh] w-full basis-8/12 flex-col overflow-hidden  lg:h-[calc(100vh-5rem)] ">
           {chonogram.map((item) => (

@@ -6,16 +6,21 @@ export const menu = [
   },
   {
     id: 2,
+    title: "Presentación",
+    to: "/#presentacion",
+  },
+  {
+    id: 3,
     title: "Objetivos",
     to: "/#objetivos",
   },
   {
-    id: 3,
+    id: 4,
     title: "Temáticas",
     to: "/#tematicas",
   },
   {
-    id: 4,
+    id: 5,
     title: "Cronograma",
     to: "/#cronograma",
   },
@@ -25,12 +30,12 @@ export const menu = [
   //   to: "/#inscripcion",
   // },
   {
-    id: 5,
+    id: 6,
     title: "Nos Acompañan",
     to: "/#nos-acompañan",
   },
   {
-    id: 6,
+    id: 7,
     title: "Contactanos",
     to: "/#contactanos",
   },

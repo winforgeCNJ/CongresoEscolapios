@@ -3,7 +3,7 @@ import React from "react";
 
 export default function Logo() {
   return (
-    <Link href='#' className="hover:scale-[1.04] transition-transform">
+    <Link href='/' className="hover:scale-[1.04] transition-transform">
       <img
         src="/logo.png"
         alt="logo"
