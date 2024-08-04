@@ -9,11 +9,11 @@ export const adherents = [
     url: "/assets/adherents/Escuelas-Pias-argentina.png",
     text: "Escuelas Pías de Argentina",
   },
-  {
-    id: 3,
-    url: "/assets/adherents/fundación-hombre-nuevo.png",
-    text: "Fundación Hombre Nuevo",
-  },
+  // {
+  //   id: 3,
+  //   url: "/assets/adherents/fundación-hombre-nuevo.png",
+  //   text: "Fundación Hombre Nuevo",
+  // },
   {
     id: 4,
     url: "/assets/adherents/Integralis.png",
