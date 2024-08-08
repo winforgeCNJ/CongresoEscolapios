@@ -1,6 +1,7 @@
 import { Alegreya } from "next/font/google";
 import Button from "../ui/button";
 import React from "react";
+import claculateHasDatePassed from "@/lib/hasDatePassed";
 
 export const alegreya = Alegreya({
   subsets: ["latin"],
@@ -8,6 +9,8 @@ export const alegreya = Alegreya({
 });
 
 export default function Hero() {
+  const hasDatePassed = claculateHasDatePassed();
+
   return (
     <section
       id="umbral"
@@ -20,12 +23,14 @@ export default function Hero() {
       </h1>
 
       <div className="w-100 absolute bottom-8 left-1/2 flex -translate-x-1/2 flex-col gap-6">
-        <Button
-          to="/inscripcion"
-          className="hover:scale-[1.15] hover:tracking-normal"
-        >
-          Inscripción
-        </Button>
+        {!hasDatePassed && (
+          <Button
+            to="/inscripcion"
+            className="hover:scale-[1.15] hover:tracking-normal"
+          >
+            Inscripción
+          </Button>
+        )}
         <Button
           to="/#objetivos"
           className="hover:scale-[1.15] hover:tracking-normal"

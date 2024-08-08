@@ -1,4 +1,4 @@
-import Header from "@/components/widgets/header"
+import Header from "@/components/widgets/header";
 import Popup from "@/components/widgets/popup";
 import { Work_Sans } from "next/font/google";
 import { Metadata } from "next";
@@ -35,7 +35,6 @@ export const metadata: Metadata = {
     "materiales bibliograficos de educación",
   ],
 };
-
 
 export default function RootLayout({
   children,

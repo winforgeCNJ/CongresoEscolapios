@@ -5,6 +5,7 @@ import { Alegreya } from 'next/font/google';
 import React, { useState } from 'react'
 import IconArrowRigth2 from '../icons/icon-arrow-right-2'
 import { useRouter } from 'next/navigation'
+import claculateHasDatePassed from "@/lib/hasDatePassed";
 
 export const alegreya = Alegreya({
   subsets: ["latin"],
@@ -20,6 +21,8 @@ export default function Popup() {
     setIsView(false);
   };
 
+  const hasDatePassed = claculateHasDatePassed();
+  if (hasDatePassed) return <></>
 
   return (
     <>  
