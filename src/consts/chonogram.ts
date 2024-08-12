@@ -25,16 +25,16 @@ export const chonogram: ChonogramI[] = [
     id: 1,
     hostImg: "/assets/chonogram/catherine.webp",
     date: "Viernes 30 de agosto",
-    to: "De 8:00 a 13:30hs",
+    to: "De 7:00 a 13:30hs",
     to2: "De 15:15 a 20hs",
     isOpen: false,
     morningDescription: {
       title: "Mañana",
       coursesHours: [
-        "8:00 Acreditación",
+        "7:00 Recepción y acreditaciones",
         "8:30 Apertura y presentación",
         "9:00 Dr. Carlos Torrendell - La dinámica de la política educativa en Argentina",
-        "9:30 Dr. Horacio Ferreyra",
+        "9:30 Dr. Horacio Ferreyra - La escuela posible: políticas, cultura y prácticas",
         "10:00 Dra. Catherine L'Ecuyer - De dónde vienen y a dónde van los métodos educativos que están en nuestras aulas",
         "10:45 Preguntas",
         "11:00 Pausa",
@@ -60,7 +60,7 @@ export const chonogram: ChonogramI[] = [
             {
               title: "PEDAGOGÍA Y DIDÁCTICA",
               description: [
-                "Agustín Suárez y Benjamín D'Amario - Evangelización del currículum e integración de ámbitos de estudio (Experiencia)",
+                "Alejandro Juy G. Armando - Seminario Socrático: innovar en una propuesta humanista (experiencia)",
                 "P.G. Serpez Sch.P. y P.Matías Pavón Sch.P. - La educación humanista y occidente: Proyecto de Humanidades",
               ],
             },
@@ -98,7 +98,7 @@ export const chonogram: ChonogramI[] = [
               title: "PEDAGOGÍA Y DIDÁCTICA",
               description: [
                 "Candelaria Luque y Hernán Ojeda - El Inglés como estrategia de formación humanista y cristiana (experiencia)",
-                "Alejandro Juy G. Armando - Seminario Socrático: innovar en una propuesta humanista (experiencia)",
+                "Agustín Suárez y Benjamín D'Amario - Evangelización del currículum e integración de ámbitos de estudio (Experiencia)",
               ],
             },
             {
@@ -125,16 +125,16 @@ export const chonogram: ChonogramI[] = [
     id: 2,
     hostImg: "/assets/chonogram/carlos-torrendell.webp",
     date: "Sábado 31 de agosto",
-    to: "De 8:30 a 13:30hs",
-    to2: "De 15:15 a 20hs",
+    to: "De 8:00 a 13:30hs",
+    to2: "De 15:30 a 20hs",
     isOpen: false,
     morningDescription: {
       title: "Mañana",
       coursesHours: [
+        "8:00 Oración abierta con la comunidad religiosa en la iglesia del colegio",
         "8:30 Recepción y oración",
-        "8:45 Dr. Daniel Lasa",
-        "9:30 Preguntas",
-        "9:45 P. Marcelo Benítez Sch.P",
+        "8:45 Dr. Daniel Lasa - Vigencia de la educación humanista",
+        "9:30 Dra. Catherine L'Ecuyer - La libertad educativa",
         "10:15 Pausa",
         "10:30 Carlos Hoevel - ¿Es posible recrear hoy la idea clásica de la Universidad? Diálogo con J.H. Newman",
         "11:00 Dr. Ramón Cornavaca,  Dr. Pedro Villagra y Dr. Cavallero: Conversatorio sobre Paideia Griega y Educación en los Padres de la Iglesia",
@@ -148,13 +148,13 @@ export const chonogram: ChonogramI[] = [
       title: "Tarde",
       coursesHours: [
         {
-          title: "15:15 Talleres",
+          title: "15:30 Talleres",
           content: [
             {
               title: "PASTORAL Y TEOLOGÍA",
               description: [
                 "Denise Tagliaferro y Susana Pérez - La atención pastoral y formación de las familias que se acercan a la propuesta escolar",
-                "María Isabel y Gutierrez Teran - Faustino Miguez, una propuesta de felicidad"
+                "María Isabel y Gutierrez Teran - Faustino Miguez, una propuesta de felicidad",
               ],
             },
             {
@@ -180,9 +180,9 @@ export const chonogram: ChonogramI[] = [
             },
           ],
         },
-        "16:30 Pausa",
+        "17:00 Pausa",
         {
-          title: "17:00 Talleres",
+          title: "17:30 Talleres",
           content: [
             {
               title: "PASTORAL Y TEOLOGÍA ",
@@ -213,7 +213,8 @@ export const chonogram: ChonogramI[] = [
             },
           ],
         },
-        "18:15 Evento Cultural",
+        "18:45 Pausa",
+        "19:00 P. Marcelo Benítez Sch.P. -  John Senior y la restauración de las Humanidades",
         "20:00 Cierre",
       ],
     },
@@ -222,13 +223,14 @@ export const chonogram: ChonogramI[] = [
     id: 3,
     hostImg: "/assets/chonogram/paola-delbosco.webp",
     date: "Domingo 1 de septiembre",
-    to: "De 8:30 a 12:40hs",
+    to: "De 8:00 a 12:40hs",
     isOpen: false,
     morningDescription: {
       title: "Mañana",
       coursesHours: [
+        "8:00 Oración abierta con la comunidad religiosa en la iglesia del colegio",
         "8:30 Recepción y oración",
-        "8:45 Dr. Rubén Peretó Rivas-Dr. Hugo Costarelli Brandi- Ceferino Muñoz Medina - Acerca de la amistad y las Artes Liberales",
+        "8:45 Dr. Rubén Peretó Rivas-Dr. Hugo Costarelli Brandi- Ceferino Muñoz Medina - Amistad y educación",
         "9:30 Preguntas",
         "9:45 P. Andrés de Cristo Sch.P. - Cristo maestro ",
         "10:15 Lic. Virginia Montini. - The Paideia Proposal",
