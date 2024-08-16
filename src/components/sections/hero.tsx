@@ -20,12 +20,12 @@ export default function Hero() {
       </h1>
 
       <div className="w-100 absolute bottom-8 left-1/2 flex -translate-x-1/2 flex-col gap-6">
-        <Button
+        {/* <Button
           to="/inscripcion"
           className="hover:scale-[1.15] hover:tracking-normal"
         >
           Inscripción
-        </Button>
+        </Button> */}
 
         <Button
           to="/#objetivos"

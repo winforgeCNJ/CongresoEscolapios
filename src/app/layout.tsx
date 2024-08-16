@@ -1,5 +1,5 @@
 import Header from "@/components/widgets/header";
-import Popup from "@/components/widgets/popup";
+// import Popup from "@/components/widgets/popup";
 import { Work_Sans } from "next/font/google";
 import { Metadata } from "next";
 import "./globals.css";
@@ -45,7 +45,7 @@ export default function RootLayout({
     <html lang="es">
       <body className={workSans.className}>
         <Header />
-        <Popup />
+        {/* <Popup /> */}
         {children}
       </body>
     </html>
