@@ -134,7 +134,7 @@ export const chonogram: ChonogramI[] = [
         "8:00 Oración abierta con la comunidad religiosa en la iglesia del colegio",
         "8:30 Recepción y oración",
         "8:45 Dr. Daniel Lasa - Vigencia de la educación humanista",
-        "9:30 Dra. Catherine L'Ecuyer - La libertad educativa",
+        "9:30 Dra. Catherine L'Ecuyer - Educar en el asombro",
         "10:15 Pausa",
         "10:30 Carlos Hoevel - ¿Es posible recrear hoy la idea clásica de la Universidad? Diálogo con J.H. Newman",
         "11:00 Dr. Ramón Cornavaca,  Dr. Pedro Villagra y Dr. Cavallero: Conversatorio sobre Paideia Griega y Educación en los Padres de la Iglesia",
