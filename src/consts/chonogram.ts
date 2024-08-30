@@ -39,7 +39,7 @@ export const chonogram: ChonogramI[] = [
         "10:45 Preguntas",
         "11:00 Pausa",
         "11:30 Dra. Paola Scarinci de Delbosco - Lo útil de lo “inútil”: cómo los estudios humanísticos abren la mente. ",
-        "12:15 Preguntas",
+        "12:15 Entrega de placa",
         "12:30 Santa Misa",
         "13:30 Almuerzo/Pausa",
       ],
@@ -81,7 +81,7 @@ export const chonogram: ChonogramI[] = [
           ],
         },
         "16:15 Pausa",
-        "16:45 Jorge O'Reilly - Bolsillos de cristiandad: asistencia a las familias para una educación integral",
+        "16:30 Jorge O'Reilly - Bolsillos de cristiandad: asistencia a las familias para una educación integral",
         "17:15 Dra. Catherine L'Ecuyer - ¿Cómo educar la atención en un mundo con más pantallas que ventanas?",
         "18:15 Pausa",
         {
