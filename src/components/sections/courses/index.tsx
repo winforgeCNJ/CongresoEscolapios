@@ -76,7 +76,7 @@ export default function Courses() {
                 </div>
 
                 {/* Contenido centrado */}
-                <div className="absolute inset-0 flex flex-col items-center justify-center space-y-6">
+                <div className="absolute inset-0 flex flex-col items-center justify-center space-y-6 text-center">
                     <h1
                         className="text-styled z-50 font-alegreya text-5xl font-medium text-white md:text-6xl lg:text-9xl 384px:text-4xl"
                         style={{
