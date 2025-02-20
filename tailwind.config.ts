@@ -17,6 +17,12 @@ const config: Config = {
         secondary: "#aaa587",
         "box-dropdown": "#6b7485",
       },
+      fontFamily: {
+        alegreya: ['"Alegreya"', "serif"], // Definimos Alegreya
+      },
+      screens: {
+        '384px': { max: '384px' }, // Media query para pantallas <= 380px
+      },
     },
   },
   plugins: [require('tailwindcss-animated')],

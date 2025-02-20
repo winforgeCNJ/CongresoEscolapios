@@ -21,8 +21,8 @@ export const menu = [
   },
   {
     id: 5,
-    title: "Cronograma",
-    to: "/#cronograma",
+    title: "Cursos",
+    to: "/#cursos",
   },
   // {
   //   id: 5,
