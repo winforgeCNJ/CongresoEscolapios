@@ -11,11 +11,12 @@ export const socials = [
   {
     id: 2,
     icon: IconWhatsapp,
-    to: "https://api.whatsapp.com/send?phone=5493584393164",
+    to: "https://api.whatsapp.com/send?phone=54935s84393164",
   },
-  {
+  /* {
     id: 3,
     icon: IconUbicacion,
     to: "https://maps.app.goo.gl/N5Ry8s58TtF2RPNY7?g_st=iw",
   },
+  */
 ];
